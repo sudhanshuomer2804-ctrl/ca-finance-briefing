@@ -1,4 +1,4 @@
-const CACHE_NAME = "ca-finance-briefing-v3";
+const CACHE_NAME = "ca-finance-briefing-v2026-09-23-2";
 
 const CORE_ASSETS = [
   "./",
@@ -8,67 +8,88 @@ const CORE_ASSETS = [
 ];
 
 
-/* =========================================================
-   INSTALL
-========================================================= */
+/* INSTALL */
 
 self.addEventListener("install", event => {
 
-  self.skipWaiting();
-
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CORE_ASSETS))
+
+    caches
+      .open(CACHE_NAME)
+      .then(cache =>
+        cache.addAll(CORE_ASSETS)
+      )
+
   );
+
+  self.skipWaiting();
 
 });
 
 
-/* =========================================================
-   ACTIVATE
-========================================================= */
+/* ACTIVATE */
 
 self.addEventListener("activate", event => {
 
   event.waitUntil(
 
-    caches.keys()
-      .then(keys => {
+    caches
+      .keys()
+      .then(keys =>
 
-        return Promise.all(
+        Promise.all(
 
           keys
-            .filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
+            .filter(key =>
+              key !== CACHE_NAME
+            )
+            .map(key =>
+              caches.delete(key)
+            )
 
-        );
+        )
 
-      })
-      .then(() => self.clients.claim())
+      )
 
   );
+
+  self.clients.claim();
 
 });
 
 
-/* =========================================================
-   FETCH
-========================================================= */
+/* FETCH */
 
 self.addEventListener("fetch", event => {
 
   const request = event.request;
 
   /*
-   * HTML navigation:
-   * ALWAYS try the network first.
-   * This prevents GitHub Pages from serving
-   * an old cached index.html.
+   * Never cache Google Apps Script API calls.
+   * This is critical because the briefing must remain current.
    */
 
   if (
-    request.mode === "navigate" ||
-    request.destination === "document"
+    request.url.includes("script.google.com") ||
+    request.url.includes("script.googleusercontent.com")
+  ) {
+
+    event.respondWith(
+      fetch(request)
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * Navigation:
+   * Network first, then cached index.
+   */
+
+  if (
+    request.mode === "navigate"
   ) {
 
     event.respondWith(
@@ -76,70 +97,50 @@ self.addEventListener("fetch", event => {
       fetch(request)
         .then(response => {
 
-          const copy = response.clone();
+          const copy =
+            response.clone();
 
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(request, copy);
-            });
+          caches
+            .open(CACHE_NAME)
+            .then(cache =>
+              cache.put(
+                request,
+                copy
+              )
+            );
 
           return response;
 
         })
-        .catch(() => {
-
-          return caches.match(request)
-            .then(cached => {
-
-              return cached ||
-                caches.match("./index.html");
-
-            });
-
-        })
+        .catch(() =>
+          caches.match(
+            "./index.html"
+          )
+        )
 
     );
 
     return;
+
   }
 
 
   /*
-   * Other assets:
-   * Cache first, then network.
+   * Static assets:
+   * Cache first.
    */
 
   event.respondWith(
 
-    caches.match(request)
+    caches
+      .match(request)
       .then(cached => {
 
         if (cached) {
           return cached;
         }
 
-        return fetch(request)
-          .then(response => {
-
-            if (
-              response &&
-              response.status === 200 &&
-              response.type === "basic"
-            ) {
-
-              const copy =
-                response.clone();
-
-              caches.open(CACHE_NAME)
-                .then(cache => {
-                  cache.put(request, copy);
-                });
-
-            }
-
-            return response;
-
-          });
+        return fetch(request);
 
       })
 
@@ -148,80 +149,69 @@ self.addEventListener("fetch", event => {
 });
 
 
-/* =========================================================
-   PUSH NOTIFICATIONS
-========================================================= */
+/* PUSH NOTIFICATIONS */
 
-self.addEventListener("push", event => {
+self.addEventListener(
+  "push",
+  event => {
 
-  let data = {};
+    let data = {};
 
-  try {
+    try {
 
-    data =
-      event.data
-        ? event.data.json()
-        : {};
+      data =
+        event.data
+          ? event.data.json()
+          : {};
 
-  } catch (error) {
+    } catch (error) {
 
-    data = {
-      title: "CA Finance Briefing",
-      body: event.data
-        ? event.data.text()
-        : "New briefing available."
-    };
+      data = {
+        title: "CA Finance Briefing",
+        body: "New briefing available."
+      };
 
-  }
+    }
 
 
-  const title =
-    data.title ||
-    "CA Finance Briefing";
+    const title =
+      data.title ||
+      "CA Finance Briefing";
 
 
-  const options = {
+    const options = {
 
-    body:
-      data.body ||
-      "Your latest finance briefing is ready.",
+      body:
+        data.body ||
+        "Your latest finance briefing is ready.",
 
-    icon:
-      data.icon ||
-      "./icon.svg",
+      icon:
+        "./icon.svg",
 
-    badge:
-      data.badge ||
-      "./icon.svg",
+      badge:
+        "./icon.svg",
 
-    data: {
-      url:
+      data:
         data.url ||
         "./"
-    },
 
-    tag: "ca-finance-briefing",
-
-    renotify: true
-
-  };
+    };
 
 
-  event.waitUntil(
+    event.waitUntil(
 
-    self.registration.showNotification(
-      title,
-      options
-    )
+      self.registration.showNotification(
+        title,
+        options
+      )
 
-  );
+    );
 
-});
+  }
+);
 
 
-/* =========================================================
-   NOTIFICATION CLICK
-========================================================= */
+/* NOTIFICATION CLICK */
 
 self.addEventListener(
   "notificationclick",
@@ -229,11 +219,9 @@ self.addEventListener(
 
     event.notification.close();
 
-    const targetUrl =
-      event.notification.data &&
-      event.notification.data.url
-        ? event.notification.data.url
-        : "./";
+    const target =
+      event.notification.data ||
+      "./";
 
 
     event.waitUntil(
@@ -244,17 +232,13 @@ self.addEventListener(
       })
       .then(clientList => {
 
-        for (
-          const client of clientList
-        ) {
+        for (const client of clientList) {
 
           if (
             "focus" in client
           ) {
 
-            client.navigate(
-              targetUrl
-            );
+            client.navigate(target);
 
             return client.focus();
 
@@ -262,13 +246,12 @@ self.addEventListener(
 
         }
 
-
         if (
           clients.openWindow
         ) {
 
           return clients.openWindow(
-            targetUrl
+            target
           );
 
         }
