@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0d14">
+<meta name="description" content="CA Finance Briefing — daily CA, tax, accounting, markets and India business news.">
+<title>CA Finance Briefing</title>
+
+<style>
+:root{
+  --bg:#070a10;
+  --panel:rgba(17,22,32,.78);
+  --panel-2:rgba(22,28,41,.9);
+  --border:rgba(255,255,255,.09);
+  --text:#f5f7fb;
+  --muted:#9ba6b8;
+  --accent:#d7b56d;
+  --accent-2:#8fa7ff;
+  --green:#56d6a0;
+  --red:#ff7185;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(143,167,255,.12),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(215,181,109,.10),transparent 28%),
+    linear-gradient(180deg,#080b12 0%,#05070c 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:-30%;
+  z-index:-1;
+  background:
+    radial-gradient(circle,rgba(143,167,255,.07) 0 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,black,transparent 70%);
+  animation:drift 22s linear infinite;
+}
+@keyframes drift{to{transform:translate3d(34px,34px,0)}}
+
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  background:rgba(7,10,16,.72);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav{
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{
+  width:42px;height:42px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#f0d18c,#9d7a37);
+  color:#111;
+  font-weight:900;
+  box-shadow:0 10px 30px rgba(215,181,109,.18);
+  animation:logoFloat 4s ease-in-out infinite;
+}
+@keyframes logoFloat{50%{transform:translateY(-3px) rotate(1deg)}}
+
+.brand-title{font-size:15px;font-weight:800;letter-spacing:.2px}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+.actions{display:flex;gap:8px;align-items:center}
+button{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.045);
+  color:var(--text);
+  border-radius:12px;
+  padding:10px 13px;
+  font:inherit;
+  cursor:pointer;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+button:hover{transform:translateY(-2px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+button:active{transform:translateY(0) scale(.97)}
+button.primary{
+  background:linear-gradient(135deg,#e1c37e,#b28c47);
+  color:#111;
+  border-color:transparent;
+  font-weight:800;
+  box-shadow:0 10px 30px rgba(215,181,109,.14);
+}
+.icon-btn{width:42px;height:42px;padding:0;display:grid;place-items:center}
+
+.hero{
+  padding:72px 0 34px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:30px;
+  align-items:center;
+}
+
+.hero-copy{animation:rise .75s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 11px;border:1px solid rgba(215,181,109,.2);
+  background:rgba(215,181,109,.06);
+  color:#e5c986;border-radius:999px;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;background:#56d6a0;
+  box-shadow:0 0 0 0 rgba(86,214,160,.5);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(86,214,160,0)}100%{box-shadow:0 0 0 0 rgba(86,214,160,0)}}
+
+h1{
+  margin:18px 0 14px;
+  font-size:clamp(38px,6vw,72px);
+  line-height:.98;
+  letter-spacing:-3px;
+}
+.gradient-text{
+  background:linear-gradient(100deg,#fff,#cbd4e6 48%,#d7b56d);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{max-width:680px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+
+.hero-card{
+  min-height:270px;
+  padding:26px;
+  border:1px solid var(--border);
+  border-radius:28px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),
+    rgba(12,16,24,.72);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  animation:cardIn .9s .12s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateX(24px) scale(.97)}to{opacity:1;transform:none}}
+.hero-card::before{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;border-radius:50%;
+  right:-70px;top:-90px;
+  background:radial-gradient(circle,rgba(143,167,255,.24),transparent 65%);
+  animation:orb 6s ease-in-out infinite;
+}
+@keyframes orb{50%{transform:translate(-20px,20px) scale(1.12)}}
+.mini-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.big-number{font-size:48px;font-weight:850;letter-spacing:-2px;margin:12px 0 4px}
+.status{color:var(--green);font-size:12px;font-weight:700}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px}
+.mini{
+  padding:13px;border:1px solid var(--border);border-radius:15px;background:rgba(255,255,255,.035)
+}
+.mini b{display:block;font-size:15px;margin-bottom:4px}.mini span{font-size:11px;color:var(--muted)}
+
+.toolbar{
+  display:flex;justify-content:space-between;align-items:center;gap:15px;
+  margin:14px 0 18px;
+}
+.section-title{font-size:22px;font-weight:850;letter-spacing:-.5px}
+.section-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter.active{background:rgba(215,181,109,.13);border-color:rgba(215,181,109,.35);color:#efd795}
+
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  padding-bottom:70px;
+}
+
+.story{
+  position:relative;
+  min-height:290px;
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+  overflow:hidden;
+  box-shadow:0 14px 45px rgba(0,0,0,.18);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
+  animation:storyIn .65s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay:calc(var(--i) * 90ms);
+}
+@keyframes storyIn{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+.story:hover{transform:translateY(-7px);border-color:rgba(215,181,109,.25);box-shadow:0 25px 65px rgba(0,0,0,.34)}
+.story::after{
+  content:"";
+  position:absolute;inset:auto -30% -65% -30%;height:160px;
+  background:radial-gradient(circle,rgba(143,167,255,.12),transparent 62%);
+  pointer-events:none;
+}
+.story-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tag{
+  font-size:10px;font-weight:850;letter-spacing:.8px;text-transform:uppercase;
+  padding:6px 9px;border-radius:999px;background:rgba(143,167,255,.1);color:#b8c5ff;
+}
+.date{font-size:10px;color:var(--muted)}
+.story h2{font-size:20px;line-height:1.25;letter-spacing:-.5px;margin:17px 0 11px}
+.summary{font-size:13px;line-height:1.65;color:#c0c8d6;margin:0}
+.why{
+  margin-top:18px;padding:13px 14px;border-radius:14px;
+  background:rgba(215,181,109,.055);border:1px solid rgba(215,181,109,.11);
+}
+.why strong{display:block;color:#e6cf95;font-size:10px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+.why span{font-size:12px;line-height:1.55;color:#bdc5d2}
+.story-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:19px}
+.source{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.read{
+  flex:0 0 auto;
+  text-decoration:none;color:#111;background:#f0d28b;
+  padding:8px 11px;border-radius:10px;font-size:11px;font-weight:850;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.read:hover{transform:translateX(2px);box-shadow:0 8px 22px rgba(215,181,109,.18)}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:55px 20px;
+  border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)
+}
+
+.settings{
+  margin:10px 0 70px;
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:rgba(255,255,255,.035);overflow:hidden;
+}
+.settings summary{cursor:pointer;padding:18px 20px;font-weight:800;list-style:none}
+.settings summary::-webkit-details-marker{display:none}
+.settings summary::after{content:"＋";float:right;color:var(--muted);transition:transform .25s}
+.settings[open] summary::after{transform:rotate(45deg)}
+.settings-body{padding:0 20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
+input{
+  width:100%;padding:12px 13px;border-radius:12px;
+  border:1px solid var(--border);background:rgba(0,0,0,.22);
+  color:var(--text);outline:none;
+}
+input:focus{border-color:rgba(143,167,255,.5);box-shadow:0 0 0 3px rgba(143,167,255,.08)}
+.setting-actions{grid-column:1/-1;display:flex;gap:9px;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--border);padding:25px 0 35px;color:var(--muted);font-size:11px;text-align:center}
+
+.toast{
+  position:fixed;left:50%;bottom:24px;z-index:50;
+  transform:translate(-50%,20px);
+  opacity:0;pointer-events:none;
+  padding:12px 16px;border:1px solid var(--border);
+  border-radius:13px;background:rgba(13,17,25,.94);
+  box-shadow:var(--shadow);font-size:12px;
+  transition:opacity .3s,transform .3s;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.skeleton{
+  height:290px;border-radius:var(--radius);
+  background:linear-gradient(100deg,rgba(255,255,255,.035) 30%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.035) 70%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+}
+@keyframes shimmer{to{background-position:-200% 0}}
+
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr;padding-top:48px}
+  .hero-card{min-height:220px}
+}
+@media(max-width:680px){
+  .container{width:min(100% - 22px,1180px)}
+  .nav{height:68px}
+  .brand-sub{display:none}
+  .actions .label{display:none}
+  h1{font-size:46px;letter-spacing:-2.2px}
+  .news-grid{grid-template-columns:1fr}
+  .toolbar{align-items:flex-start;flex-direction:column}
+  .settings-body{grid-template-columns:1fr}
+  .setting-actions{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">₹</div>
+      <div>
+        <div class="brand-title">CA Finance Briefing</div>
+        <div class="brand-sub">Tax • Accounting • Markets • Business</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="icon-btn" id="refreshBtn" title="Refresh">↻</button>
+      <button class="primary" id="notifyBtn"><span class="label">Enable Notifications</span><span class="mobile-icon">🔔</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="live-dot"></span> Daily Intelligence</div>
+      <h1>Stay ahead of<br><span class="gradient-text">finance.</span></h1>
+      <p>Five important developments across CA, tax, accounting, markets and India business — curated into a fast daily briefing for finance professionals.</p>
+    </div>
+
+    <div class="hero-card">
+      <div class="mini-label">Today's briefing</div>
+      <div class="big-number" id="storyCount">05</div>
+      <div class="status">● Latest briefing loaded</div>
+      <div class="mini-grid">
+        <div class="mini"><b>India</b><span>Tax • Business • Markets</span></div>
+        <div class="mini"><b>Global</b><span>Economy • Finance • Regulation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="toolbar">
+      <div>
+        <div class="section-title">Top stories</div>
+        <div class="section-sub" id="lastUpdated">Updating briefing…</div>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="CA & Tax">CA & Tax</button>
+        <button class="filter" data-filter="Markets">Markets</button>
+        <button class="filter" data-filter="Business">Business</button>
+      </div>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  </section>
+
+  <details class="settings">
+    <summary>⚙ App Settings</summary>
+    <div class="settings-body">
+      <div class="field">
+        <label for="backendUrl">Google Apps Script Web App URL</label>
+        <input id="backendUrl" placeholder="https://script.google.com/macros/s/.../exec">
+      </div>
+      <div class="field">
+        <label for="notificationTime">Preferred notification time</label>
+        <input id="notificationTime" type="time" value="07:00">
+      </div>
+      <div class="setting-actions">
+        <button class="primary" id="saveSettings">Save settings</button>
+        <button id="installBtn">Install app</button>
+      </div>
+    </div>
+  </details>
+</main>
+
+<footer>
+  CA Finance Briefing • Built for daily finance intelligence • <span id="year"></span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DEMO_STORIES = [
+  {
+    category:"CA & Tax",
+    title:"Tax & accounting updates",
+    summary:"Your latest CA, GST, income-tax, accounting-standard and regulatory developments will appear here after the Apps Script backend is connected.",
+    why:"Track changes that can affect compliance, reporting, audit documentation and client advisory.",
+    source:"CA Finance Briefing",
+    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
+    url:"#"
+  },
+  {
+    category:"Markets",
+    title:"Markets & finance briefing",
+    summary:"Connect the backend to populate the latest India and global market developments, corporate finance events and material financial news.",
+    why:"Useful for market awareness, valuation discussions, treasury and FP&A conversations.",
+    source:"CA Finance Briefing",
+    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
+    url:"#"
+  },
+  {
+    category:"Business",
+    title:"India business & economy",
+    summary:"The briefing is designed to surface material developments across Indian companies, sectors, policy and macroeconomics.",
+    why:"Helps connect financial analysis with business drivers, margins, working capital and growth.",
+    source:"CA Finance Briefing",
+    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
+    url:"#"
+  },
+  {
+    category:"Global",
+    title:"Global economy & regulation",
+    summary:"Global finance, accounting, tax, regulation and macro developments can be displayed alongside India-focused stories.",
+    why:"Builds the global context needed for corporate finance and investment analysis.",
+    source:"CA Finance Briefing",
+    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
+    url:"#"
+  },
+  {
+    category:"Finance",
+    title:"Daily finance takeaway",
+    summary:"Each story is presented with a concise summary and a finance-professional relevance note, so the briefing stays practical.",
+    why:"Turns news consumption into an actionable finance-learning routine.",
+    source:"CA Finance Briefing",
+    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
+    url:"#"
+  }
+];
+
+let stories = [];
+let activeFilter = "all";
+let deferredInstallPrompt = null;
+
+const $ = id => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+
+function escapeHTML(value=""){
+  return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+function showToast(message){
+  const t=$("toast");
+  t.textContent=message;
+  t.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove("show"),2600);
+}
+
+function render(){
+  const grid=$("newsGrid");
+  const filtered = activeFilter==="all" ? stories :
+    stories.filter(s => (s.category||"").toLowerCase().includes(activeFilter.toLowerCase()));
+
+  $("storyCount").textContent=String(filtered.length).padStart(2,"0");
+
+  if(!filtered.length){
+    grid.innerHTML='<div class="empty">No stories match this filter.</div>';
+    return;
+  }
+
+  grid.innerHTML=filtered.map((s,i)=>`
+    <article class="story" style="--i:${i}">
+      <div class="story-top">
+        <span class="tag">${escapeHTML(s.category||"Finance")}</span>
+        <span class="date">${escapeHTML(s.date||"Latest")}</span>
+      </div>
+      <h2>${escapeHTML(s.title||"Untitled story")}</h2>
+      <p class="summary">${escapeHTML(s.summary||"Open the source for the latest details.")}</p>
+      <div class="why">
+        <strong>Why it matters</strong>
+        <span>${escapeHTML(s.why||"Relevant for finance, accounting and business analysis.")}</span>
+      </div>
+      <div class="story-bottom">
+        <span class="source">${escapeHTML(s.source||"Source")}</span>
+        ${s.url && s.url!=="#" ? `<a class="read" href="${escapeHTML(s.url)}" target="_blank" rel="noopener">Read source ↗</a>` : ""}
+      </div>
+    </article>
+  `).join("");
+}
+
+async function loadStories(){
+  const backend = localStorage.getItem("backendUrl") || "";
+  if(!backend){
+    stories=DEMO_STORIES;
+    $("lastUpdated").textContent="Demo content • Connect Apps Script in Settings";
+    render();
+    return;
+  }
+
+  $("lastUpdated").textContent="Refreshing latest briefing…";
+  try{
+    const response=await fetch(backend + (backend.includes("?")?"&":"?") + "action=latest", {cache:"no-store"});
+    if(!response.ok) throw new Error("Backend returned " + response.status);
+    const data=await response.json();
+    stories=Array.isArray(data.stories) ? data.stories.slice(0,5) : [];
+    if(!stories.length) stories=DEMO_STORIES;
+    $("lastUpdated").textContent="Updated " + new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+    render();
+  }catch(err){
+    stories=DEMO_STORIES;
+    $("lastUpdated").textContent="Demo content • Backend connection failed";
+    render();
+    showToast("Could not load the briefing. Check your Apps Script URL.");
+  }
+}
+
+document.querySelectorAll(".filter").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter=btn.dataset.filter;
+    render();
+  });
+});
+
+$("refreshBtn").addEventListener("click", async ()=>{
+  const btn=$("refreshBtn");
+  btn.style.transform="rotate(360deg)";
+  setTimeout(()=>btn.style.transform="",450);
+  await loadStories();
+  showToast("Briefing refreshed");
+});
+
+$("saveSettings").addEventListener("click",()=>{
+  localStorage.setItem("backendUrl",$("backendUrl").value.trim());
+  localStorage.setItem("notificationTime",$("notificationTime").value);
+  showToast("Settings saved");
+  loadStories();
+});
+
+$("backendUrl").value=localStorage.getItem("backendUrl")||"";
+$("notificationTime").value=localStorage.getItem("notificationTime")||"07:00";
+
+$("notifyBtn").addEventListener("click",async()=>{
+  if(!("Notification" in window)){
+    showToast("Notifications are not supported in this browser.");
+    return;
+  }
+  const permission=await Notification.requestPermission();
+  if(permission==="granted"){
+    showToast("Notifications enabled on this device.");
+    try{
+      if("serviceWorker" in navigator) await navigator.serviceWorker.register("./sw.js");
+    }catch(e){}
+  }else{
+    showToast("Notification permission was not granted.");
+  }
+});
+
+$("installBtn").addEventListener("click",async()=>{
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt=null;
+  }else{
+    showToast("Use your browser menu → Install app / Add to Home screen.");
+  }
+});
+
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+});
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+
+loadStories();
+</script>
+</body>
+</html>
