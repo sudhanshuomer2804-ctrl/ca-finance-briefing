@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <meta name="theme-color" content="#070b14" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  />
+  <meta name="theme-color" content="#080b12">
+
+  <meta name="description"
+        content="Daily CA, Tax, Accounting, Markets, Business and Global Finance briefing.">
+
+  <link rel="manifest" href="manifest.json">
 
   <title>CA Finance Briefing</title>
 
-  <link rel="manifest" href="manifest.json" />
-
   <style>
-    /* =========================================================
-       RESET
-    ========================================================= */
+    :root {
+      --bg: #07090d;
+      --card: #10141c;
+      --card2: #151a24;
+      --border: rgba(255,255,255,.09);
+      --text: #f5f7fb;
+      --muted: #929aaa;
+      --accent: #ffffff;
+      --accent2: #c8d0dc;
+      --success: #8ee6b0;
+      --danger: #ff8f8f;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -36,6 +40,12 @@
     }
 
     body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,.055), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(120,140,180,.06), transparent 25%),
+        var(--bg);
+      color: var(--text);
       font-family:
         Inter,
         ui-sans-serif,
@@ -44,397 +54,167 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
-      background:
-        radial-gradient(
-          circle at 15% 10%,
-          rgba(56, 189, 248, 0.08),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 85% 15%,
-          rgba(139, 92, 246, 0.08),
-          transparent 30%
-        ),
-        #070b14;
-
-      color: #f8fafc;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
     }
 
     button {
-      cursor: pointer;
+      font: inherit;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* =========================================================
-       BACKGROUND
-    ========================================================= */
-
-    .background {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.18;
-      animation: floatOrb 12s ease-in-out infinite;
-    }
-
-    .orb.one {
-      width: 300px;
-      height: 300px;
-      background: #2563eb;
-      top: -100px;
-      left: -100px;
-    }
-
-    .orb.two {
-      width: 260px;
-      height: 260px;
-      background: #7c3aed;
-      right: -100px;
-      top: 25%;
-      animation-delay: -4s;
-    }
-
-    .orb.three {
-      width: 220px;
-      height: 220px;
-      background: #0891b2;
-      left: 25%;
-      bottom: -120px;
-      animation-delay: -8s;
-    }
-
-    @keyframes floatOrb {
-      0%,
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate3d(20px, -25px, 0) scale(1.08);
-      }
-    }
-
-    /* =========================================================
-       APP CONTAINER
-    ========================================================= */
 
     .app {
-      width: min(1180px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 24px 0 50px;
+      width: min(1100px, 100%);
+      margin: auto;
+      padding:
+        max(22px, env(safe-area-inset-top))
+        18px
+        calc(40px + env(safe-area-inset-bottom));
     }
 
-    /* =========================================================
-       TOP NAV
-    ========================================================= */
+    /* HEADER */
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
-
-      padding: 16px 18px;
-
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 22px;
-
-      background: rgba(10, 15, 27, 0.72);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-
-      animation: slideDown 0.6s ease both;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      gap: 14px;
+      margin-bottom: 26px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 11px;
     }
 
-    .brand-logo {
-      width: 45px;
-      height: 45px;
-
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
       display: grid;
       place-items: center;
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.95),
-          rgba(124, 58, 237, 0.95)
-        );
-
-      box-shadow:
-        0 10px 30px rgba(59, 130, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
-
-      font-size: 22px;
+      background: linear-gradient(145deg, #191e28, #090b10);
+      box-shadow: var(--shadow);
+      font-size: 21px;
       font-weight: 800;
     }
 
-    .brand-title {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.2px;
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: .02em;
     }
 
-    .brand-subtitle {
-      color: #94a3b8;
+    .brand-text span {
+      color: var(--muted);
       font-size: 11px;
-      margin-top: 2px;
     }
 
-    .nav-actions {
+    .top-actions {
       display: flex;
-      align-items: center;
       gap: 8px;
     }
 
     .icon-btn {
-      width: 40px;
-      height: 40px;
-
-      display: grid;
-      place-items: center;
-
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.04);
-
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      color: var(--text);
+      cursor: pointer;
     }
 
     .icon-btn:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,.08);
     }
 
-    .icon-btn:active {
-      transform: scale(0.95);
-    }
-
-    .refreshing .refresh-icon {
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* =========================================================
-       HERO
-    ========================================================= */
+    /* HERO */
 
     .hero {
-      margin-top: 24px;
-      padding: 42px 34px;
-
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(15, 23, 42, 0.94),
-          rgba(9, 15, 28, 0.78)
-        );
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
       position: relative;
       overflow: hidden;
-
-      animation: fadeUp 0.7s ease 0.1s both;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px 28px;
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,255,.065),
+          rgba(255,255,255,.018));
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      width: 450px;
-      height: 450px;
-      right: -200px;
-      top: -240px;
-
-      background: radial-gradient(
-        circle,
-        rgba(59, 130, 246, 0.17),
-        transparent 65%
-      );
-
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 780px;
+      width: 280px;
+      height: 280px;
+      right: -120px;
+      top: -140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.045);
+      filter: blur(2px);
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 7px 11px;
-
-      border: 1px solid rgba(96, 165, 250, 0.18);
-      border-radius: 999px;
-
-      color: #93c5fd;
-      background: rgba(59, 130, 246, 0.08);
-
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.7px;
+      color: #b9c1cf;
       text-transform: uppercase;
-    }
-
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(0.65);
-        opacity: 0.5;
-      }
+      letter-spacing: .14em;
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
     .hero h1 {
-      margin-top: 18px;
-
-      font-size: clamp(34px, 6vw, 64px);
-      line-height: 1.02;
-      letter-spacing: -2.8px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff 0%,
-          #dbeafe 45%,
-          #93c5fd 100%
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      margin: 0;
+      font-size: clamp(32px, 6vw, 58px);
+      line-height: .98;
+      letter-spacing: -.045em;
+      max-width: 700px;
     }
 
     .hero p {
-      margin-top: 17px;
-
-      color: #94a3b8;
-      max-width: 690px;
-
-      font-size: 15px;
-      line-height: 1.7;
+      color: var(--muted);
+      margin: 18px 0 0;
+      max-width: 650px;
+      line-height: 1.65;
+      font-size: 14px;
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 23px;
+      gap: 8px;
+      margin-top: 20px;
     }
 
-    .meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 9px 12px;
-
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.045);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-
-      color: #cbd5e1;
-      font-size: 12px;
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      color: #c7ced9;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
     }
 
-    /* =========================================================
-       CONTROL BAR
-    ========================================================= */
+    /* FILTERS */
 
-    .controls {
-      margin-top: 18px;
-
+    .toolbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
-
-      animation: fadeUp 0.7s ease 0.2s both;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 20px 0 15px;
+      flex-wrap: wrap;
     }
 
     .filters {
       display: flex;
       gap: 7px;
       overflow-x: auto;
-      padding: 3px;
-
       scrollbar-width: none;
+      padding-bottom: 2px;
     }
 
     .filters::-webkit-scrollbar {
@@ -443,635 +223,281 @@
 
     .filter {
       flex: 0 0 auto;
-
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,.025);
       padding: 9px 13px;
-
-      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 999px;
-
-      color: #94a3b8;
-      background: rgba(255, 255, 255, 0.035);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      transition: all 0.2s ease;
-    }
-
-    .filter:hover {
-      color: #e2e8f0;
-      background: rgba(255, 255, 255, 0.07);
+      cursor: pointer;
+      font-size: 12px;
     }
 
     .filter.active {
-      color: #fff;
-      border-color: rgba(96, 165, 250, 0.25);
-      background: rgba(59, 130, 246, 0.15);
+      color: #080a0e;
+      background: #f3f5f8;
+      border-color: #f3f5f8;
+      font-weight: 700;
     }
 
     .status {
-      color: #64748b;
+      color: var(--muted);
       font-size: 11px;
       white-space: nowrap;
     }
 
-    /* =========================================================
-       STORIES GRID
-    ========================================================= */
+    /* STORIES */
 
     .stories {
-      margin-top: 18px;
-
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-
-      animation: fadeUp 0.7s ease 0.3s both;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .story-card {
+    .story {
       position: relative;
       overflow: hidden;
-
-      min-height: 300px;
-
-      border: 1px solid rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, var(--card), #0b0e14);
       border-radius: 22px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(15, 23, 42, 0.9),
-          rgba(8, 13, 24, 0.82)
-        );
-
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.16);
-
-      transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-
-      animation: cardIn 0.55s ease both;
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease, border-color .2s ease;
     }
 
-    .story-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(96, 165, 250, 0.2);
-
-      box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.25),
-        0 0 35px rgba(59, 130, 246, 0.05);
-    }
-
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px) scale(0.98);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    .story:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.17);
     }
 
     .story-image {
-      height: 165px;
-      position: relative;
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(30, 41, 59, 1),
-          rgba(15, 23, 42, 1)
-        );
-    }
-
-    .story-image img {
       width: 100%;
-      height: 100%;
+      height: 145px;
       object-fit: cover;
-
-      opacity: 0.82;
-
-      transition:
-        transform 0.5s ease,
-        opacity 0.5s ease;
-    }
-
-    .story-card:hover .story-image img {
-      transform: scale(1.055);
-      opacity: 0.95;
-    }
-
-    .story-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-
+      display: block;
       background:
-        linear-gradient(
-          to bottom,
-          transparent 20%,
-          rgba(7, 11, 20, 0.85) 100%
-        );
+        linear-gradient(135deg, #171d27, #0a0c11);
     }
 
-    .story-number {
-      position: absolute;
-      left: 14px;
-      top: 14px;
-      z-index: 2;
-
-      width: 31px;
-      height: 31px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 10px;
-
-      background: rgba(7, 11, 20, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-
-      color: #e2e8f0;
-      font-size: 12px;
-      font-weight: 800;
-
-      backdrop-filter: blur(10px);
-    }
-
-    .story-category {
-      position: absolute;
-      left: 55px;
-      top: 17px;
-      z-index: 2;
-
-      padding: 5px 9px;
-
-      border-radius: 999px;
-
-      color: #dbeafe;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(147, 197, 253, 0.15);
-
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-
-      backdrop-filter: blur(10px);
+    .story-image.hidden {
+      display: none;
     }
 
     .story-body {
-      padding: 18px 18px 19px;
-    }
-
-    .story-title {
-      font-size: 17px;
-      line-height: 1.38;
-      letter-spacing: -0.35px;
-      font-weight: 780;
-
-      color: #f8fafc;
-    }
-
-    .story-summary {
-      margin-top: 10px;
-
-      color: #94a3b8;
-      font-size: 12px;
-      line-height: 1.65;
-
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .why-box {
-      margin-top: 13px;
-      padding: 11px 12px;
-
-      border-left: 2px solid #3b82f6;
-      border-radius: 0 10px 10px 0;
-
-      background: rgba(59, 130, 246, 0.06);
-    }
-
-    .why-label {
-      color: #60a5fa;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-    }
-
-    .why-text {
-      margin-top: 4px;
-      color: #cbd5e1;
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .story-footer {
-      margin-top: 15px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .source-info {
-      min-width: 0;
-    }
-
-    .source {
-      color: #cbd5e1;
-      font-size: 10px;
-      font-weight: 700;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 170px;
-    }
-
-    .date {
-      margin-top: 3px;
-      color: #64748b;
-      font-size: 9px;
-    }
-
-    .read-btn {
-      flex: 0 0 auto;
-
-      padding: 8px 11px;
-
-      border: 1px solid rgba(96, 165, 250, 0.18);
-      border-radius: 10px;
-
-      color: #bfdbfe;
-      background: rgba(59, 130, 246, 0.08);
-
-      font-size: 10px;
-      font-weight: 750;
-
-      transition: all 0.2s ease;
-    }
-
-    .read-btn:hover {
-      background: rgba(59, 130, 246, 0.16);
-      border-color: rgba(96, 165, 250, 0.3);
-    }
-
-    /* =========================================================
-       EMPTY / LOADING
-    ========================================================= */
-
-    .loading-card {
-      grid-column: 1 / -1;
-
-      min-height: 260px;
-
+      padding: 19px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 22px;
-
-      background: rgba(15, 23, 42, 0.55);
-    }
-
-    .loader {
-      width: 42px;
-      height: 42px;
-
-      border-radius: 50%;
-
-      border: 3px solid rgba(255, 255, 255, 0.08);
-      border-top-color: #60a5fa;
-
-      animation: spin 0.8s linear infinite;
-    }
-
-    .loading-text {
-      margin-top: 15px;
-      color: #94a3b8;
-      font-size: 12px;
-    }
-
-    .empty-card {
-      grid-column: 1 / -1;
-
-      padding: 40px 24px;
-      text-align: center;
-
-      border: 1px dashed rgba(255, 255, 255, 0.1);
-      border-radius: 22px;
-
-      background: rgba(15, 23, 42, 0.5);
-    }
-
-    .empty-icon {
-      font-size: 35px;
-      margin-bottom: 13px;
-    }
-
-    .empty-title {
-      font-size: 16px;
-      font-weight: 750;
-    }
-
-    .empty-text {
-      margin-top: 7px;
-      color: #64748b;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-
-    footer {
-      margin-top: 25px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-
-      color: #475569;
-      font-size: 10px;
-
-      animation: fadeUp 0.7s ease 0.4s both;
-    }
-
-    .footer-brand {
-      font-weight: 750;
-      color: #64748b;
-    }
-
-    /* =========================================================
-       TOAST
-    ========================================================= */
-
-    .toast-container {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-
-      z-index: 1000;
-
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-
-      width: min(360px, calc(100% - 36px));
-    }
-
-    .toast {
-      padding: 13px 15px;
-
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 14px;
-
-      background: rgba(15, 23, 42, 0.94);
-      backdrop-filter: blur(18px);
-
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-
-      color: #e2e8f0;
-
-      font-size: 12px;
-      line-height: 1.5;
-
-      animation:
-        toastIn 0.3s ease both,
-        toastOut 0.35s ease 4.6s forwards;
-    }
-
-    @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes toastOut {
-      to {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-    }
-
-    .toast.success {
-      border-left: 3px solid #22c55e;
-    }
-
-    .toast.error {
-      border-left: 3px solid #ef4444;
-    }
-
-    .toast.info {
-      border-left: 3px solid #3b82f6;
-    }
-
-    /* =========================================================
-       INSTALL BANNER
-    ========================================================= */
-
-    .install-banner {
-      position: fixed;
-
-      left: 50%;
-      bottom: 18px;
-
-      transform: translateX(-50%) translateY(130px);
-
-      width: min(440px, calc(100% - 30px));
-
-      padding: 14px;
-
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      border: 1px solid rgba(96, 165, 250, 0.18);
-      border-radius: 18px;
-
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(20px);
-
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
-
-      z-index: 999;
-
-      opacity: 0;
-      pointer-events: none;
-
-      transition:
-        transform 0.4s ease,
-        opacity 0.4s ease;
-    }
-
-    .install-banner.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .install-text {
       flex: 1;
     }
 
-    .install-title {
-      font-size: 12px;
-      font-weight: 800;
+    .story-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 11px;
     }
 
-    .install-subtitle {
-      margin-top: 3px;
-      color: #64748b;
+    .category {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: #cbd2dc;
       font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
 
-    .install-btn {
-      padding: 9px 12px;
+    .date {
+      color: #727a89;
+      font-size: 10px;
+      text-align: right;
+    }
 
-      border: none;
+    .story h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -.015em;
+    }
+
+    .summary {
+      color: #aeb6c4;
+      font-size: 13px;
+      line-height: 1.58;
+      margin: 12px 0 0;
+    }
+
+    .why {
+      margin-top: 13px;
+      padding: 11px 12px;
+      border-left: 2px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.025);
+      color: #c5ccd7;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .story-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 17px;
+    }
+
+    .source {
+      color: #7f8795;
+      font-size: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .read {
+      flex: 0 0 auto;
+      color: #f5f6f8;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      padding: 8px 11px;
       border-radius: 10px;
-
-      background: #3b82f6;
-      color: white;
-
-      font-size: 10px;
-      font-weight: 800;
     }
 
-    /* =========================================================
-       RESPONSIVE
-    ========================================================= */
+    .read:hover {
+      background: rgba(255,255,255,.07);
+    }
 
-    @media (max-width: 760px) {
+    /* STATES */
+
+    .state {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      text-align: center;
+      background: rgba(255,255,255,.025);
+    }
+
+    .state h2 {
+      margin: 0 0 9px;
+      font-size: 18px;
+    }
+
+    .state p {
+      color: var(--muted);
+      margin: 0 auto 18px;
+      max-width: 520px;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .primary-btn {
+      border: 0;
+      background: #f4f6f9;
+      color: #07090d;
+      padding: 11px 16px;
+      border-radius: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 11px;
+      cursor: pointer;
+    }
+
+    .spinner {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.12);
+      border-top-color: #fff;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 13px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* INSTALL */
+
+    .install {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(255,255,255,.035);
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .install.show {
+      display: flex;
+    }
+
+    .install strong {
+      font-size: 12px;
+    }
+
+    .install span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      color: #606876;
+      text-align: center;
+      padding: 28px 0 8px;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 720px) {
       .app {
-        width: min(100% - 18px, 600px);
-        padding-top: 9px;
-      }
-
-      .topbar {
-        padding: 13px 14px;
-        border-radius: 18px;
-      }
-
-      .brand-logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-      }
-
-      .brand-title {
-        font-size: 14px;
-      }
-
-      .brand-subtitle {
-        font-size: 9px;
+        padding-left: 13px;
+        padding-right: 13px;
       }
 
       .hero {
-        padding: 31px 22px;
-        border-radius: 22px;
-      }
-
-      .hero h1 {
-        font-size: 39px;
-        letter-spacing: -2px;
-      }
-
-      .hero p {
-        font-size: 13px;
-      }
-
-      .controls {
-        display: block;
-      }
-
-      .status {
-        display: block;
-        margin-top: 9px;
+        padding: 28px 20px;
+        border-radius: 23px;
       }
 
       .stories {
         grid-template-columns: 1fr;
       }
 
-      .story-card {
-        min-height: 0;
-      }
-
-      footer {
-        flex-direction: column;
+      .toolbar {
         align-items: flex-start;
       }
-    }
 
-    @media (max-width: 420px) {
-      .hero h1 {
-        font-size: 35px;
-      }
-
-      .hero-meta {
-        gap: 7px;
-      }
-
-      .meta-pill {
-        font-size: 10px;
-      }
-
-      .story-image {
-        height: 150px;
-      }
-
-      .story-title {
-        font-size: 16px;
+      .status {
+        width: 100%;
       }
     }
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -1079,1441 +505,916 @@
 
 <body>
 
-  <!-- =======================================================
-       BACKGROUND
-  ======================================================== -->
+<div class="app">
 
-  <div class="background">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
+  <header class="topbar">
+
+    <div class="brand">
+      <div class="brand-icon">₹</div>
+
+      <div class="brand-text">
+        <strong>CA Finance Briefing</strong>
+        <span>Daily intelligence for finance professionals</span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button
+        class="icon-btn"
+        id="refreshBtn"
+        title="Refresh briefing"
+        aria-label="Refresh briefing">
+        ↻
+      </button>
+    </div>
+
+  </header>
+
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      Daily intelligence • India + Global
+    </div>
+
+    <h1>
+      Know what<br>
+      matters today.
+    </h1>
+
+    <p>
+      A focused daily briefing covering CA, tax, accounting,
+      markets, business, economy and global finance — with
+      practical relevance for finance professionals.
+    </p>
+
+    <div class="hero-meta">
+      <span class="pill">CA & Tax</span>
+      <span class="pill">Accounting</span>
+      <span class="pill">Markets</span>
+      <span class="pill">Business</span>
+      <span class="pill">Global Finance</span>
+    </div>
+
+  </section>
+
+
+  <div class="toolbar">
+
+    <div class="filters">
+
+      <button class="filter active" data-filter="All">
+        All
+      </button>
+
+      <button class="filter" data-filter="CA & Tax">
+        CA & Tax
+      </button>
+
+      <button class="filter" data-filter="Accounting">
+        Accounting
+      </button>
+
+      <button class="filter" data-filter="Markets">
+        Markets
+      </button>
+
+      <button class="filter" data-filter="Business">
+        Business
+      </button>
+
+      <button class="filter" data-filter="Global">
+        Global
+      </button>
+
+    </div>
+
+    <div class="status" id="status">
+      Connecting…
+    </div>
+
   </div>
 
-  <!-- =======================================================
-       MAIN APP
-  ======================================================== -->
 
-  <main class="app">
+  <main id="content">
 
-    <!-- TOP BAR -->
+    <div class="state">
 
-    <header class="topbar">
+      <div class="spinner"></div>
 
-      <div class="brand">
+      <h2>Loading today's briefing</h2>
 
-        <div class="brand-logo">
-          ₹
-        </div>
+      <p>
+        Fetching the latest CA, tax, markets and business updates.
+      </p>
 
-        <div>
-          <div class="brand-title">
-            CA Finance Briefing
-          </div>
-
-          <div class="brand-subtitle">
-            Tax • Markets • Business • Economy
-          </div>
-        </div>
-
-      </div>
-
-      <div class="nav-actions">
-
-        <button
-          class="icon-btn"
-          id="installTopBtn"
-          title="Install App"
-          style="display:none;"
-        >
-          ⬇
-        </button>
-
-        <button
-          class="icon-btn"
-          id="refreshBtn"
-          title="Refresh briefing"
-          aria-label="Refresh briefing"
-        >
-          <span class="refresh-icon">↻</span>
-        </button>
-
-      </div>
-
-    </header>
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <div class="hero-content">
-
-        <div class="eyebrow">
-          <span class="live-dot"></span>
-          Daily Intelligence
-        </div>
-
-        <h1>
-          Know what<br />
-          matters today.
-        </h1>
-
-        <p>
-          A focused daily briefing covering CA, taxation, accounting,
-          financial markets, Indian business, economy and global finance —
-          curated for finance professionals.
-        </p>
-
-        <div class="hero-meta">
-
-          <div class="meta-pill">
-            <span>⚡</span>
-            Breaking & Current
-          </div>
-
-          <div class="meta-pill">
-            <span>📊</span>
-            Finance Focused
-          </div>
-
-          <div class="meta-pill">
-            <span>🇮🇳</span>
-            India + Global
-          </div>
-
-          <div class="meta-pill">
-            <span>📰</span>
-            5 Key Stories
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- FILTERS -->
-
-    <section class="controls">
-
-      <div class="filters">
-
-        <button
-          class="filter active"
-          data-category="All"
-        >
-          All
-        </button>
-
-        <button
-          class="filter"
-          data-category="CA & Tax"
-        >
-          CA & Tax
-        </button>
-
-        <button
-          class="filter"
-          data-category="Accounting"
-        >
-          Accounting
-        </button>
-
-        <button
-          class="filter"
-          data-category="Markets"
-        >
-          Markets
-        </button>
-
-        <button
-          class="filter"
-          data-category="Business"
-        >
-          Business
-        </button>
-
-        <button
-          class="filter"
-          data-category="Global"
-        >
-          Global
-        </button>
-
-      </div>
-
-      <div
-        class="status"
-        id="statusText"
-      >
-        Loading latest briefing...
-      </div>
-
-    </section>
-
-
-    <!-- STORIES -->
-
-    <section
-      class="stories"
-      id="stories"
-    >
-
-      <div class="loading-card">
-
-        <div class="loader"></div>
-
-        <div class="loading-text">
-          Fetching today's financial intelligence...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-      <div class="footer-brand">
-        CA Finance Briefing
-      </div>
-
-      <div id="lastUpdated">
-        Connecting to briefing server...
-      </div>
-
-      <div>
-        Built for finance professionals
-      </div>
-
-    </footer>
+    </div>
 
   </main>
 
 
-  <!-- =======================================================
-       TOASTS
-  ======================================================== -->
+  <div class="install" id="installBox">
 
-  <div
-    class="toast-container"
-    id="toastContainer"
-  ></div>
-
-
-  <!-- =======================================================
-       INSTALL BANNER
-  ======================================================== -->
-
-  <div
-    class="install-banner"
-    id="installBanner"
-  >
-
-    <div class="install-text">
-
-      <div class="install-title">
-        Install CA Finance Briefing
-      </div>
-
-      <div class="install-subtitle">
-        Add the dashboard to your phone's home screen.
-      </div>
-
+    <div>
+      <strong>Install CA Finance Briefing</strong>
+      <span>Add it to your phone or desktop for quick access.</span>
     </div>
 
-    <button
-      class="install-btn"
-      id="installBtn"
-    >
+    <button class="primary-btn" id="installBtn">
       Install
     </button>
 
   </div>
 
 
-  <script>
+  <footer>
+    CA Finance Briefing<br>
+    Information is compiled from published sources. Always verify
+    regulatory and market information with the original source.
+  </footer>
 
-    /* =========================================================
-       CONFIGURATION
-    ========================================================= */
-
-    const APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbywH8CC_GGi6mogbwQtrKEsaotBZ4N1Ug0tQMDFzko3zyuRCIVpUskHlFHNH4yjGQ5F/exec";
-
-
-    const MAX_STORIES = 5;
+</div>
 
 
-    /* =========================================================
-       STATE
-    ========================================================= */
+<script>
 
-    let allStories = [];
+  /* ============================================================
+     CONFIGURATION
+     ============================================================ */
 
-    let selectedCategory = "All";
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbywH8CC_GGi6mogbwQtrKEsaotBZ4N1Ug0tQMDFzko3zyuRCIVpUskHlFHNH4yjGQ5F/exec";
 
-    let deferredInstallPrompt = null;
-
-    let isLoading = false;
-
-
-    /* =========================================================
-       DOM
-    ========================================================= */
-
-    const storiesContainer =
-      document.getElementById("stories");
-
-    const statusText =
-      document.getElementById("statusText");
-
-    const lastUpdated =
-      document.getElementById("lastUpdated");
-
-    const refreshBtn =
-      document.getElementById("refreshBtn");
-
-    const toastContainer =
-      document.getElementById("toastContainer");
-
-    const installBanner =
-      document.getElementById("installBanner");
-
-    const installBtn =
-      document.getElementById("installBtn");
-
-    const installTopBtn =
-      document.getElementById("installTopBtn");
+  const APP_VERSION = "2026.09.23.2";
 
 
-    /* =========================================================
-       INITIALISE
-    ========================================================= */
+  /* ============================================================
+     GLOBAL STATE
+     ============================================================ */
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        setupFilters();
-
-        setupInstall();
-
-        loadBriefing();
-
-        registerServiceWorker();
-
-      }
-    );
+  let allStories = [];
+  let currentFilter = "All";
+  let deferredInstallPrompt = null;
 
 
-    /* =========================================================
-       SERVICE WORKER
-    ========================================================= */
+  /* ============================================================
+     DOM
+     ============================================================ */
 
-    function registerServiceWorker() {
+  const content =
+    document.getElementById("content");
+
+  const statusEl =
+    document.getElementById("status");
+
+  const refreshBtn =
+    document.getElementById("refreshBtn");
+
+  const installBox =
+    document.getElementById("installBox");
+
+  const installBtn =
+    document.getElementById("installBtn");
+
+
+  /* ============================================================
+     HELPERS
+     ============================================================ */
+
+  function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+      return "";
+    }
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function safeUrl(value) {
+
+    if (!value) {
+      return "";
+    }
+
+    try {
+
+      const url = new URL(value);
 
       if (
-        "serviceWorker" in navigator
+        url.protocol === "http:" ||
+        url.protocol === "https:"
       ) {
-
-        window.addEventListener(
-          "load",
-          () => {
-
-            navigator.serviceWorker
-              .register("./sw.js")
-              .then(
-                registration => {
-
-                  console.log(
-                    "Service Worker registered:",
-                    registration.scope
-                  );
-
-                }
-              )
-              .catch(
-                error => {
-
-                  console.warn(
-                    "Service Worker registration failed:",
-                    error
-                  );
-
-                }
-              );
-
-          }
-        );
-
+        return url.href;
       }
 
-    }
+    } catch (error) {}
 
+    return "";
+  }
 
-    /* =========================================================
-       LOAD BRIEFING
-    ========================================================= */
 
-    async function loadBriefing() {
+  function normalizeStory(story, response) {
 
-      if (isLoading) {
-        return;
-      }
+    return {
 
-      isLoading = true;
+      category:
+        story.category ||
+        "General",
 
-      setRefreshing(true);
+      title:
+        story.title ||
+        "Untitled Story",
 
-      statusText.textContent =
-        "Fetching latest briefing...";
+      summary:
+        story.summary ||
+        "",
 
-      try {
+      whyItMatters:
+        story.whyItMatters ||
+        story.why ||
+        "",
 
-        const data =
-          await requestJSONP(
-            APPS_SCRIPT_URL +
-            "?action=latest"
-          );
+      source:
+        story.source ||
+        "Unknown Source",
 
-        console.log(
-          "Apps Script response:",
-          data
-        );
+      publishedAt:
+        story.publishedAt ||
+        story.date ||
+        "",
 
-        if (
-          data &&
-          data.success &&
-          Array.isArray(data.stories)
-        ) {
+      url:
+        safeUrl(story.url || ""),
 
-          allStories =
-            data.stories.slice(
-              0,
-              MAX_STORIES
-            );
-
-          renderStories();
-
-          const updated =
-            data.fetchedAt ||
-            data.updatedAt ||
-            new Date().toISOString();
-
-          lastUpdated.textContent =
-            "Updated " +
-            formatDate(updated);
-
-          statusText.textContent =
-            allStories.length +
-            " stories loaded";
-
-          showToast(
-            "Latest briefing loaded.",
-            "success"
-          );
-
-        } else {
-
-          throw new Error(
-            data && data.error
-              ? data.error
-              : "Invalid response from Apps Script."
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Briefing error:",
-          error
-        );
-
-        showError(error);
-
-        statusText.textContent =
-          "Unable to load briefing";
-
-      } finally {
-
-        isLoading = false;
-
-        setRefreshing(false);
-
-      }
-
-    }
-
-
-    /* =========================================================
-       OPTIONAL FORCE REFRESH
-    ========================================================= */
-
-    async function refreshBriefing() {
-
-      if (isLoading) {
-        return;
-      }
-
-      isLoading = true;
-
-      setRefreshing(true);
-
-      statusText.textContent =
-        "Refreshing today's briefing...";
-
-      try {
-
-        const data =
-          await requestJSONP(
-            APPS_SCRIPT_URL +
-            "?action=refresh"
-          );
-
-        console.log(
-          "Refresh response:",
-          data
-        );
-
-        if (
-          data &&
-          data.success &&
-          Array.isArray(data.stories)
-        ) {
-
-          allStories =
-            data.stories.slice(
-              0,
-              MAX_STORIES
-            );
-
-          renderStories();
-
-          lastUpdated.textContent =
-            "Updated " +
-            formatDate(
-              data.fetchedAt ||
-              new Date().toISOString()
-            );
-
-          statusText.textContent =
-            allStories.length +
-            " fresh stories loaded";
-
-          showToast(
-            "Briefing refreshed successfully.",
-            "success"
-          );
-
-        } else {
-
-          throw new Error(
-            data && data.error
-              ? data.error
-              : "Refresh failed."
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Refresh error:",
-          error
-        );
-
-        showToast(
-          "Refresh failed. Showing the latest available briefing.",
-          "error"
-        );
-
-      } finally {
-
-        isLoading = false;
-
-        setRefreshing(false);
-
-      }
-
-    }
-
-
-    /* =========================================================
-       JSONP REQUEST
-       
-       Google Apps Script ContentService responses can cause
-       browser CORS restrictions. JSONP avoids that problem.
-    ========================================================= */
-
-    function requestJSONP(url) {
-
-      return new Promise(
-        (resolve, reject) => {
-
-          const callbackName =
-            "__caFinanceCallback_" +
-            Date.now() +
-            "_" +
-            Math.floor(
-              Math.random() * 100000
-            );
-
-          const script =
-            document.createElement("script");
-
-          let completed = false;
-
-          const timeout =
-            setTimeout(
-              () => {
-
-                if (completed) {
-                  return;
-                }
-
-                completed = true;
-
-                cleanup();
-
-                reject(
-                  new Error(
-                    "The Apps Script server did not respond within 15 seconds."
-                  )
-                );
-
-              },
-              15000
-            );
-
-
-          window[callbackName] =
-            function(data) {
-
-              if (completed) {
-                return;
-              }
-
-              completed = true;
-
-              clearTimeout(timeout);
-
-              cleanup();
-
-              resolve(data);
-
-            };
-
-
-          script.src =
-            url +
-            (
-              url.includes("?")
-                ? "&"
-                : "?"
-            ) +
-            "callback=" +
-            encodeURIComponent(
-              callbackName
-            );
-
-
-          script.async = true;
-
-
-          script.onerror =
-            function() {
-
-              if (completed) {
-                return;
-              }
-
-              completed = true;
-
-              clearTimeout(timeout);
-
-              cleanup();
-
-              reject(
-                new Error(
-                  "Unable to connect to the Apps Script backend."
-                )
-              );
-
-            };
-
-
-          document
-            .head
-            .appendChild(script);
-
-
-          function cleanup() {
-
-            try {
-
-              script.remove();
-
-            } catch (e) {}
-
-            try {
-
-              delete window[
-                callbackName
-              ];
-
-            } catch (e) {
-
-              window[
-                callbackName
-              ] = undefined;
-
-            }
-
-          }
-
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       RENDER STORIES
-    ========================================================= */
-
-    function renderStories() {
-
-      const filteredStories =
-        selectedCategory === "All"
-          ? allStories
-          : allStories.filter(
-              story =>
-                normalizeCategory(
-                  story.category
-                ) ===
-                normalizeCategory(
-                  selectedCategory
-                )
-            );
-
-
-      if (
-        !filteredStories.length
-      ) {
-
-        storiesContainer.innerHTML = `
-
-          <div class="empty-card">
-
-            <div class="empty-icon">
-              📰
-            </div>
-
-            <div class="empty-title">
-              No stories in this category
-            </div>
-
-            <div class="empty-text">
-              Try another category or refresh the briefing.
-            </div>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      storiesContainer.innerHTML =
-        filteredStories
-          .map(
-            (story, index) =>
-              createStoryCard(
-                story,
-                index
-              )
-          )
-          .join("");
-
-    }
-
-
-    /* =========================================================
-       STORY CARD
-    ========================================================= */
-
-    function createStoryCard(
-      story,
-      index
-    ) {
-
-      const title =
-        escapeHtml(
-          story.title ||
-          "Untitled story"
-        );
-
-
-      const summary =
-        escapeHtml(
-          story.summary ||
-          story.description ||
-          "No summary available."
-        );
-
-
-      const why =
-        escapeHtml(
-          story.whyItMatters ||
-          story.why ||
-          "Relevant for finance and business professionals."
-        );
-
-
-      const category =
-        escapeHtml(
-          story.category ||
-          "Finance"
-        );
-
-
-      const source =
-        escapeHtml(
-          story.source ||
-          "Source unavailable"
-        );
-
-
-      const published =
-        formatDate(
-          story.publishedAt ||
-          story.pubDate ||
-          story.date
-        );
-
-
-      const image =
+      imageUrl:
         safeUrl(
           story.imageUrl ||
           story.image ||
           ""
-        );
+        ),
+
+      fetchedAt:
+        story.fetchedAt ||
+        response.fetchedAt ||
+        response.updatedAt ||
+        ""
+
+    };
+
+  }
 
 
-      const articleUrl =
-        safeUrl(
-          story.url ||
-          story.link ||
-          "#"
-        );
+  /* ============================================================
+     JSONP REQUEST
+     ============================================================ */
+
+  function requestJSONP(action) {
+
+    return new Promise((resolve, reject) => {
+
+      const callbackName =
+        "caFinanceCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(Math.random() * 100000);
+
+      const script =
+        document.createElement("script");
+
+      const timeout =
+        setTimeout(() => {
+
+          cleanup();
+
+          reject(
+            new Error(
+              "Apps Script request timed out."
+            )
+          );
+
+        }, 20000);
 
 
-      const imageHtml =
-        image
-          ? `
-              <img
-                src="${image}"
-                alt=""
-                loading="lazy"
-                onerror="this.parentElement.classList.add('image-failed'); this.remove();"
-              />
-            `
-          : "";
+      function cleanup() {
 
+        clearTimeout(timeout);
 
-      return `
+        delete window[callbackName];
 
-        <article
-          class="story-card"
-          style="animation-delay:${index * 80}ms"
-        >
-
-          <div class="story-image">
-
-            ${imageHtml}
-
-            <div class="story-number">
-              ${index + 1}
-            </div>
-
-            <div class="story-category">
-              ${category}
-            </div>
-
-          </div>
-
-
-          <div class="story-body">
-
-            <h2 class="story-title">
-              ${title}
-            </h2>
-
-
-            <p class="story-summary">
-              ${summary}
-            </p>
-
-
-            <div class="why-box">
-
-              <div class="why-label">
-                Why it matters
-              </div>
-
-              <div class="why-text">
-                ${why}
-              </div>
-
-            </div>
-
-
-            <div class="story-footer">
-
-              <div class="source-info">
-
-                <div
-                  class="source"
-                  title="${source}"
-                >
-                  ${source}
-                </div>
-
-                <div class="date">
-                  ${published}
-                </div>
-
-              </div>
-
-
-              ${
-                articleUrl !== "#"
-                  ? `
-                    <a
-                      class="read-btn"
-                      href="${articleUrl}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read story ↗
-                    </a>
-                  `
-                  : ""
-              }
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `;
-
-    }
-
-
-    /* =========================================================
-       CATEGORY FILTERS
-    ========================================================= */
-
-    function setupFilters() {
-
-      document
-        .querySelectorAll(".filter")
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              () => {
-
-                document
-                  .querySelectorAll(".filter")
-                  .forEach(
-                    item =>
-                      item.classList.remove(
-                        "active"
-                      )
-                  );
-
-
-                button.classList.add(
-                  "active"
-                );
-
-
-                selectedCategory =
-                  button.dataset.category ||
-                  "All";
-
-
-                renderStories();
-
-              }
-            );
-
-          }
-        );
-
-    }
-
-
-    /* =========================================================
-       REFRESH BUTTON
-    ========================================================= */
-
-    refreshBtn.addEventListener(
-      "click",
-      () => {
-
-        refreshBriefing();
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
 
       }
-    );
 
 
-    /* =========================================================
-       REFRESH ANIMATION
-    ========================================================= */
+      window[callbackName] = function(data) {
 
-    function setRefreshing(
-      state
-    ) {
+        cleanup();
 
-      if (state) {
+        resolve(data);
 
-        refreshBtn.classList.add(
-          "refreshing"
+      };
+
+
+      script.onerror = function() {
+
+        cleanup();
+
+        reject(
+          new Error(
+            "Could not connect to Google Apps Script."
+          )
         );
 
-        refreshBtn.disabled = true;
+      };
+
+
+      const separator =
+        API_URL.includes("?")
+          ? "&"
+          : "?";
+
+
+      script.src =
+        API_URL +
+        separator +
+        "action=" +
+        encodeURIComponent(action) +
+        "&callback=" +
+        encodeURIComponent(callbackName) +
+        "&v=" +
+        encodeURIComponent(APP_VERSION);
+
+
+      document.body.appendChild(script);
+
+    });
+
+  }
+
+
+  /* ============================================================
+     LOAD BRIEFING
+     ============================================================ */
+
+  async function loadBriefing() {
+
+    showLoading();
+
+    setStatus("Loading latest briefing…");
+
+    try {
+
+      const data =
+        await requestJSONP("latest");
+
+
+      /*
+       * IMPORTANT:
+       *
+       * Backend currently returns:
+       * {
+       *   ok: true,
+       *   updatedAt: "...",
+       *   stories: [...]
+       * }
+       *
+       * Newer backend versions may return:
+       * {
+       *   success: true,
+       *   fetchedAt: "...",
+       *   stories: [...]
+       * }
+       *
+       * We support BOTH.
+       */
+
+      const validResponse =
+        data &&
+        (
+          data.success === true ||
+          data.ok === true
+        ) &&
+        Array.isArray(data.stories);
+
+
+      if (!validResponse) {
+
+        console.error(
+          "Invalid Apps Script response:",
+          data
+        );
+
+        throw new Error(
+          "Invalid response from Apps Script."
+        );
+
+      }
+
+
+      allStories =
+        data.stories.map(
+          story =>
+            normalizeStory(story, data)
+        );
+
+
+      renderStories();
+
+
+      if (allStories.length === 0) {
+
+        setStatus(
+          "No briefing available yet"
+        );
 
       } else {
 
-        refreshBtn.classList.remove(
-          "refreshing"
+        setStatus(
+          allStories.length +
+          " stories • " +
+          (
+            data.updatedAt ||
+            data.fetchedAt ||
+            "Updated just now"
+          )
         );
-
-        refreshBtn.disabled = false;
 
       }
 
+    } catch (error) {
+
+      console.error(error);
+
+      showError(
+        error.message ||
+        "Could not load the briefing."
+      );
+
+      setStatus("Connection error");
+
+    }
+
+  }
+
+
+  /* ============================================================
+     REFRESH BRIEFING
+     ============================================================ */
+
+  async function refreshBriefing() {
+
+    refreshBtn.disabled = true;
+
+    refreshBtn.style.opacity = ".5";
+
+    setStatus("Refreshing…");
+
+    try {
+
+      const data =
+        await requestJSONP("refresh");
+
+
+      const validResponse =
+        data &&
+        (
+          data.success === true ||
+          data.ok === true
+        ) &&
+        Array.isArray(data.stories);
+
+
+      if (!validResponse) {
+
+        console.error(
+          "Invalid refresh response:",
+          data
+        );
+
+        throw new Error(
+          "Invalid response from Apps Script."
+        );
+
+      }
+
+
+      allStories =
+        data.stories.map(
+          story =>
+            normalizeStory(story, data)
+        );
+
+
+      renderStories();
+
+
+      setStatus(
+        allStories.length +
+        " stories • Just updated"
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showError(
+        error.message ||
+        "Refresh failed."
+      );
+
+      setStatus("Refresh failed");
+
+    } finally {
+
+      refreshBtn.disabled = false;
+
+      refreshBtn.style.opacity = "1";
+
+    }
+
+  }
+
+
+  /* ============================================================
+     RENDER
+     ============================================================ */
+
+  function renderStories() {
+
+    const filtered =
+      currentFilter === "All"
+        ? allStories
+        : allStories.filter(
+            story =>
+              story.category === currentFilter
+          );
+
+
+    if (!filtered.length) {
+
+      content.innerHTML = `
+        <div class="state">
+          <h2>No stories in this category</h2>
+          <p>
+            Try another category or refresh the briefing.
+          </p>
+
+          <button
+            class="primary-btn"
+            onclick="refreshBriefing()">
+            Refresh
+          </button>
+        </div>
+      `;
+
+      return;
     }
 
 
-    /* =========================================================
-       ERROR UI
-    ========================================================= */
+    content.innerHTML = `
+      <div class="stories">
+        ${filtered
+          .map(renderStory)
+          .join("")}
+      </div>
+    `;
 
-    function showError(
-      error
-    ) {
-
-      const message =
-        error &&
-        error.message
-          ? error.message
-          : "Unknown connection error.";
+  }
 
 
-      storiesContainer.innerHTML = `
+  function renderStory(story) {
 
-        <div class="empty-card">
-
-          <div class="empty-icon">
-            ⚠️
-          </div>
-
-          <div class="empty-title">
-            Could not load the briefing
-          </div>
-
-          <div class="empty-text">
-            Check that your Google Apps Script is deployed
-            as a Web App and that access is set to
-            <strong>Anyone</strong>.
-            <br /><br />
-            ${escapeHtml(message)}
-          </div>
-
-          <br />
-
-          <button
-            class="read-btn"
-            onclick="loadBriefing()"
+    const image =
+      story.imageUrl
+        ? `
+          <img
+            class="story-image"
+            src="${escapeHtml(story.imageUrl)}"
+            alt=""
+            loading="lazy"
+            onerror="this.classList.add('hidden')"
           >
-            Try Again
-          </button>
+        `
+        : "";
+
+
+    const readButton =
+      story.url
+        ? `
+          <a
+            class="read"
+            href="${escapeHtml(story.url)}"
+            target="_blank"
+            rel="noopener noreferrer">
+            Read →
+          </a>
+        `
+        : "";
+
+
+    return `
+      <article class="story">
+
+        ${image}
+
+        <div class="story-body">
+
+          <div class="story-top">
+
+            <span class="category">
+              ${escapeHtml(story.category)}
+            </span>
+
+            <span class="date">
+              ${escapeHtml(story.publishedAt)}
+            </span>
+
+          </div>
+
+
+          <h2>
+            ${escapeHtml(story.title)}
+          </h2>
+
+
+          ${
+            story.summary
+              ? `
+                <div class="summary">
+                  ${escapeHtml(story.summary)}
+                </div>
+              `
+              : ""
+          }
+
+
+          ${
+            story.whyItMatters
+              ? `
+                <div class="why">
+                  <strong>Why it matters:</strong>
+                  ${escapeHtml(story.whyItMatters)}
+                </div>
+              `
+              : ""
+          }
+
+
+          <div class="story-footer">
+
+            <span class="source">
+              ${escapeHtml(story.source)}
+            </span>
+
+            ${readButton}
+
+          </div>
 
         </div>
 
-      `;
+      </article>
+    `;
+
+  }
 
 
-      showToast(
-        "Could not connect to the briefing server.",
-        "error"
-      );
+  /* ============================================================
+     LOADING / ERROR
+     ============================================================ */
 
-    }
+  function showLoading() {
 
+    content.innerHTML = `
+      <div class="state">
 
-    /* =========================================================
-       TOAST
-    ========================================================= */
+        <div class="spinner"></div>
 
-    function showToast(
-      message,
-      type = "info"
-    ) {
+        <h2>
+          Loading today's briefing
+        </h2>
 
-      const toast =
-        document.createElement("div");
+        <p>
+          Fetching the latest finance and business updates.
+        </p>
 
-      toast.className =
-        "toast " + type;
+      </div>
+    `;
 
-      toast.textContent =
-        message;
+  }
 
 
-      toastContainer.appendChild(
-        toast
-      );
+  function showError(message) {
+
+    content.innerHTML = `
+      <div class="state">
+
+        <h2>
+          Unable to load briefing
+        </h2>
+
+        <p>
+          ${escapeHtml(message)}
+        </p>
+
+        <button
+          class="primary-btn"
+          onclick="loadBriefing()">
+          Try Again
+        </button>
+
+      </div>
+    `;
+
+  }
 
 
-      setTimeout(
+  function setStatus(text) {
+
+    statusEl.textContent = text;
+
+  }
+
+
+  /* ============================================================
+     FILTERS
+     ============================================================ */
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
         () => {
 
-          toast.remove();
-
-        },
-        5200
-      );
-
-    }
+          document
+            .querySelectorAll(".filter")
+            .forEach(btn =>
+              btn.classList.remove("active")
+            );
 
 
-    /* =========================================================
-       DATE FORMAT
-    ========================================================= */
-
-    function formatDate(
-      value
-    ) {
-
-      if (!value) {
-        return "Date unavailable";
-      }
+          button.classList.add("active");
 
 
-      const date =
-        new Date(value);
+          currentFilter =
+            button.dataset.filter;
 
 
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return String(value);
-
-      }
-
-
-      return date.toLocaleString(
-        "en-IN",
-        {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       CATEGORY NORMALISATION
-    ========================================================= */
-
-    function normalizeCategory(
-      value
-    ) {
-
-      return String(
-        value || ""
-      )
-        .toLowerCase()
-        .replace(
-          /&/g,
-          "and"
-        )
-        .replace(
-          /[^a-z0-9]+/g,
-          ""
-        );
-
-    }
-
-
-    /* =========================================================
-       SAFE URL
-    ========================================================= */
-
-    function safeUrl(
-      value
-    ) {
-
-      if (!value) {
-        return "";
-      }
-
-
-      try {
-
-        const url =
-          new URL(
-            value,
-            window.location.href
-          );
-
-
-        if (
-          url.protocol === "http:" ||
-          url.protocol === "https:"
-        ) {
-
-          return url.href;
-
-        }
-
-      } catch (e) {}
-
-      return "";
-
-    }
-
-
-    /* =========================================================
-       HTML ESCAPING
-    ========================================================= */
-
-    function escapeHtml(
-      value
-    ) {
-
-      return String(
-        value ?? ""
-      )
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /* =========================================================
-       PWA INSTALLATION
-    ========================================================= */
-
-    function setupInstall() {
-
-      window.addEventListener(
-        "beforeinstallprompt",
-        event => {
-
-          event.preventDefault();
-
-          deferredInstallPrompt =
-            event;
-
-
-          installBanner.classList.add(
-            "show"
-          );
-
-          installTopBtn.style.display =
-            "grid";
+          renderStories();
 
         }
       );
 
-
-      installBtn.addEventListener(
-        "click",
-        installPWA
-      );
+    });
 
 
-      installTopBtn.addEventListener(
-        "click",
-        installPWA
-      );
+  /* ============================================================
+     REFRESH BUTTON
+     ============================================================ */
+
+  refreshBtn.addEventListener(
+    "click",
+    refreshBriefing
+  );
 
 
-      window.addEventListener(
-        "appinstalled",
-        () => {
+  /* ============================================================
+     PWA INSTALL
+     ============================================================ */
 
-          deferredInstallPrompt =
-            null;
+  window.addEventListener(
+    "beforeinstallprompt",
+    event => {
 
-          installBanner.classList.remove(
-            "show"
-          );
+      event.preventDefault();
 
-          installTopBtn.style.display =
-            "none";
+      deferredInstallPrompt = event;
 
-          showToast(
-            "CA Finance Briefing installed successfully.",
-            "success"
-          );
-
-        }
-      );
+      installBox.classList.add("show");
 
     }
+  );
 
 
-    async function installPWA() {
+  installBtn.addEventListener(
+    "click",
+    async () => {
 
       if (!deferredInstallPrompt) {
-
-        showToast(
-          "Use your browser's 'Add to Home Screen' option to install the app.",
-          "info"
-        );
-
         return;
-
       }
-
 
       deferredInstallPrompt.prompt();
 
+      await deferredInstallPrompt.userChoice;
 
-      const result =
-        await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
 
-
-      console.log(
-        "Install choice:",
-        result.outcome
-      );
-
-
-      deferredInstallPrompt =
-        null;
-
-
-      installBanner.classList.remove(
-        "show"
-      );
-
-      installTopBtn.style.display =
-        "none";
+      installBox.classList.remove("show");
 
     }
+  );
 
 
-    /* =========================================================
-       ONLINE / OFFLINE STATUS
-    ========================================================= */
+  window.addEventListener(
+    "appinstalled",
+    () => {
+
+      installBox.classList.remove("show");
+
+      deferredInstallPrompt = null;
+
+    }
+  );
+
+
+  /* ============================================================
+     SERVICE WORKER
+     ============================================================ */
+
+  if ("serviceWorker" in navigator) {
 
     window.addEventListener(
-      "online",
+      "load",
       () => {
 
-        showToast(
-          "Internet connection restored.",
-          "success"
-        );
+        navigator.serviceWorker
+          .register(
+            "sw.js?v=2026.09.23.2",
+            {
+              updateViaCache: "none"
+            }
+          )
+          .then(registration => {
 
-        loadBriefing();
+            console.log(
+              "Service Worker registered:",
+              registration.scope
+            );
+
+            registration.update();
+
+          })
+          .catch(error => {
+
+            console.warn(
+              "Service Worker registration failed:",
+              error
+            );
+
+          });
 
       }
     );
 
-
-    window.addEventListener(
-      "offline",
-      () => {
-
-        showToast(
-          "You are offline. Previously loaded data may remain available.",
-          "info"
-        );
-
-      }
-    );
+  }
 
 
-    /* =========================================================
-       VISIBILITY REFRESH
-       
-       If the user returns to the app after a long time,
-       check for newer data.
-    ========================================================= */
+  /* ============================================================
+     ONLINE / OFFLINE
+     ============================================================ */
 
-    let hiddenAt = null;
+  window.addEventListener(
+    "online",
+    () => {
+
+      setStatus(
+        "Online • Ready"
+      );
+
+    }
+  );
 
 
-    document.addEventListener(
-      "visibilitychange",
-      () => {
+  window.addEventListener(
+    "offline",
+    () => {
 
-        if (
-          document.hidden
-        ) {
+      setStatus(
+        "Offline"
+      );
 
-          hiddenAt =
-            Date.now();
+    }
+  );
 
-        } else if (
-          hiddenAt &&
-          Date.now() -
-            hiddenAt >
-            15 * 60 * 1000
-        ) {
 
-          loadBriefing();
+  /* ============================================================
+     START APPLICATION
+     ============================================================ */
 
-        }
+  loadBriefing();
 
-      }
-    );
-
-  </script>
+</script>
 
 </body>
 </html>
