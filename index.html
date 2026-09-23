@@ -1,579 +1,2519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a0d14">
-<meta name="description" content="CA Finance Briefing — daily CA, tax, accounting, markets and India business news.">
-<title>CA Finance Briefing</title>
+  <meta charset="UTF-8" />
 
-<style>
-:root{
-  --bg:#070a10;
-  --panel:rgba(17,22,32,.78);
-  --panel-2:rgba(22,28,41,.9);
-  --border:rgba(255,255,255,.09);
-  --text:#f5f7fb;
-  --muted:#9ba6b8;
-  --accent:#d7b56d;
-  --accent-2:#8fa7ff;
-  --green:#56d6a0;
-  --red:#ff7185;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-  --radius:22px;
-}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(143,167,255,.12),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(215,181,109,.10),transparent 28%),
-    linear-gradient(180deg,#080b12 0%,#05070c 100%);
-  overflow-x:hidden;
-}
+  <meta name="theme-color" content="#070b14" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:-30%;
-  z-index:-1;
-  background:
-    radial-gradient(circle,rgba(143,167,255,.07) 0 1px,transparent 1px);
-  background-size:34px 34px;
-  mask-image:linear-gradient(to bottom,black,transparent 70%);
-  animation:drift 22s linear infinite;
-}
-@keyframes drift{to{transform:translate3d(34px,34px,0)}}
+  <title>CA Finance Briefing</title>
 
-.container{width:min(1180px,calc(100% - 32px));margin:auto}
+  <link rel="manifest" href="manifest.json" />
 
-header{
-  position:sticky;
-  top:0;
-  z-index:20;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  background:rgba(7,10,16,.72);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
 
-.nav{
-  height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.brand{display:flex;align-items:center;gap:12px;min-width:0}
-.logo{
-  width:42px;height:42px;border-radius:13px;
-  display:grid;place-items:center;
-  background:linear-gradient(145deg,#f0d18c,#9d7a37);
-  color:#111;
-  font-weight:900;
-  box-shadow:0 10px 30px rgba(215,181,109,.18);
-  animation:logoFloat 4s ease-in-out infinite;
-}
-@keyframes logoFloat{50%{transform:translateY(-3px) rotate(1deg)}}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.brand-title{font-size:15px;font-weight:800;letter-spacing:.2px}
-.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-.actions{display:flex;gap:8px;align-items:center}
-button{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.045);
-  color:var(--text);
-  border-radius:12px;
-  padding:10px 13px;
-  font:inherit;
-  cursor:pointer;
-  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease;
-}
-button:hover{transform:translateY(-2px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
-button:active{transform:translateY(0) scale(.97)}
-button.primary{
-  background:linear-gradient(135deg,#e1c37e,#b28c47);
-  color:#111;
-  border-color:transparent;
-  font-weight:800;
-  box-shadow:0 10px 30px rgba(215,181,109,.14);
-}
-.icon-btn{width:42px;height:42px;padding:0;display:grid;place-items:center}
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(56, 189, 248, 0.08),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(139, 92, 246, 0.08),
+          transparent 30%
+        ),
+        #070b14;
 
-.hero{
-  padding:72px 0 34px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:30px;
-  align-items:center;
-}
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-.hero-copy{animation:rise .75s cubic-bezier(.2,.8,.2,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+    button,
+    input,
+    select {
+      font: inherit;
+    }
 
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 11px;border:1px solid rgba(215,181,109,.2);
-  background:rgba(215,181,109,.06);
-  color:#e5c986;border-radius:999px;
-  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;
-}
-.live-dot{
-  width:7px;height:7px;border-radius:50%;background:#56d6a0;
-  box-shadow:0 0 0 0 rgba(86,214,160,.5);
-  animation:pulse 1.8s infinite;
-}
-@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(86,214,160,0)}100%{box-shadow:0 0 0 0 rgba(86,214,160,0)}}
+    button {
+      cursor: pointer;
+    }
 
-h1{
-  margin:18px 0 14px;
-  font-size:clamp(38px,6vw,72px);
-  line-height:.98;
-  letter-spacing:-3px;
-}
-.gradient-text{
-  background:linear-gradient(100deg,#fff,#cbd4e6 48%,#d7b56d);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero p{max-width:680px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.hero-card{
-  min-height:270px;
-  padding:26px;
-  border:1px solid var(--border);
-  border-radius:28px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),
-    rgba(12,16,24,.72);
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
-  animation:cardIn .9s .12s cubic-bezier(.2,.8,.2,1) both;
-}
-@keyframes cardIn{from{opacity:0;transform:translateX(24px) scale(.97)}to{opacity:1;transform:none}}
-.hero-card::before{
-  content:"";
-  position:absolute;
-  width:220px;height:220px;border-radius:50%;
-  right:-70px;top:-90px;
-  background:radial-gradient(circle,rgba(143,167,255,.24),transparent 65%);
-  animation:orb 6s ease-in-out infinite;
-}
-@keyframes orb{50%{transform:translate(-20px,20px) scale(1.12)}}
-.mini-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.big-number{font-size:48px;font-weight:850;letter-spacing:-2px;margin:12px 0 4px}
-.status{color:var(--green);font-size:12px;font-weight:700}
-.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px}
-.mini{
-  padding:13px;border:1px solid var(--border);border-radius:15px;background:rgba(255,255,255,.035)
-}
-.mini b{display:block;font-size:15px;margin-bottom:4px}.mini span{font-size:11px;color:var(--muted)}
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
 
-.toolbar{
-  display:flex;justify-content:space-between;align-items:center;gap:15px;
-  margin:14px 0 18px;
-}
-.section-title{font-size:22px;font-weight:850;letter-spacing:-.5px}
-.section-sub{font-size:12px;color:var(--muted);margin-top:4px}
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filter.active{background:rgba(215,181,109,.13);border-color:rgba(215,181,109,.35);color:#efd795}
+    .background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
 
-.news-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px;
-  padding-bottom:70px;
-}
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: floatOrb 12s ease-in-out infinite;
+    }
 
-.story{
-  position:relative;
-  min-height:290px;
-  padding:22px;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
-  overflow:hidden;
-  box-shadow:0 14px 45px rgba(0,0,0,.18);
-  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
-  animation:storyIn .65s cubic-bezier(.2,.8,.2,1) both;
-  animation-delay:calc(var(--i) * 90ms);
-}
-@keyframes storyIn{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
-.story:hover{transform:translateY(-7px);border-color:rgba(215,181,109,.25);box-shadow:0 25px 65px rgba(0,0,0,.34)}
-.story::after{
-  content:"";
-  position:absolute;inset:auto -30% -65% -30%;height:160px;
-  background:radial-gradient(circle,rgba(143,167,255,.12),transparent 62%);
-  pointer-events:none;
-}
-.story-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.tag{
-  font-size:10px;font-weight:850;letter-spacing:.8px;text-transform:uppercase;
-  padding:6px 9px;border-radius:999px;background:rgba(143,167,255,.1);color:#b8c5ff;
-}
-.date{font-size:10px;color:var(--muted)}
-.story h2{font-size:20px;line-height:1.25;letter-spacing:-.5px;margin:17px 0 11px}
-.summary{font-size:13px;line-height:1.65;color:#c0c8d6;margin:0}
-.why{
-  margin-top:18px;padding:13px 14px;border-radius:14px;
-  background:rgba(215,181,109,.055);border:1px solid rgba(215,181,109,.11);
-}
-.why strong{display:block;color:#e6cf95;font-size:10px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
-.why span{font-size:12px;line-height:1.55;color:#bdc5d2}
-.story-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:19px}
-.source{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.read{
-  flex:0 0 auto;
-  text-decoration:none;color:#111;background:#f0d28b;
-  padding:8px 11px;border-radius:10px;font-size:11px;font-weight:850;
-  transition:transform .2s ease,box-shadow .2s ease;
-}
-.read:hover{transform:translateX(2px);box-shadow:0 8px 22px rgba(215,181,109,.18)}
+    .orb.one {
+      width: 300px;
+      height: 300px;
+      background: #2563eb;
+      top: -100px;
+      left: -100px;
+    }
 
-.empty{
-  grid-column:1/-1;text-align:center;padding:55px 20px;
-  border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)
-}
+    .orb.two {
+      width: 260px;
+      height: 260px;
+      background: #7c3aed;
+      right: -100px;
+      top: 25%;
+      animation-delay: -4s;
+    }
 
-.settings{
-  margin:10px 0 70px;
-  border:1px solid var(--border);border-radius:var(--radius);
-  background:rgba(255,255,255,.035);overflow:hidden;
-}
-.settings summary{cursor:pointer;padding:18px 20px;font-weight:800;list-style:none}
-.settings summary::-webkit-details-marker{display:none}
-.settings summary::after{content:"＋";float:right;color:var(--muted);transition:transform .25s}
-.settings[open] summary::after{transform:rotate(45deg)}
-.settings-body{padding:0 20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
-input{
-  width:100%;padding:12px 13px;border-radius:12px;
-  border:1px solid var(--border);background:rgba(0,0,0,.22);
-  color:var(--text);outline:none;
-}
-input:focus{border-color:rgba(143,167,255,.5);box-shadow:0 0 0 3px rgba(143,167,255,.08)}
-.setting-actions{grid-column:1/-1;display:flex;gap:9px;flex-wrap:wrap}
+    .orb.three {
+      width: 220px;
+      height: 220px;
+      background: #0891b2;
+      left: 25%;
+      bottom: -120px;
+      animation-delay: -8s;
+    }
 
-footer{border-top:1px solid var(--border);padding:25px 0 35px;color:var(--muted);font-size:11px;text-align:center}
+    @keyframes floatOrb {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
 
-.toast{
-  position:fixed;left:50%;bottom:24px;z-index:50;
-  transform:translate(-50%,20px);
-  opacity:0;pointer-events:none;
-  padding:12px 16px;border:1px solid var(--border);
-  border-radius:13px;background:rgba(13,17,25,.94);
-  box-shadow:var(--shadow);font-size:12px;
-  transition:opacity .3s,transform .3s;
-}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+      50% {
+        transform: translate3d(20px, -25px, 0) scale(1.08);
+      }
+    }
 
-.skeleton{
-  height:290px;border-radius:var(--radius);
-  background:linear-gradient(100deg,rgba(255,255,255,.035) 30%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.035) 70%);
-  background-size:200% 100%;animation:shimmer 1.4s infinite;
-}
-@keyframes shimmer{to{background-position:-200% 0}}
+    /* =========================================================
+       APP CONTAINER
+    ========================================================= */
 
-@media(max-width:850px){
-  .hero{grid-template-columns:1fr;padding-top:48px}
-  .hero-card{min-height:220px}
-}
-@media(max-width:680px){
-  .container{width:min(100% - 22px,1180px)}
-  .nav{height:68px}
-  .brand-sub{display:none}
-  .actions .label{display:none}
-  h1{font-size:46px;letter-spacing:-2.2px}
-  .news-grid{grid-template-columns:1fr}
-  .toolbar{align-items:flex-start;flex-direction:column}
-  .settings-body{grid-template-columns:1fr}
-  .setting-actions{grid-column:auto}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
-}
-</style>
+    .app {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 50px;
+    }
+
+    /* =========================================================
+       TOP NAV
+    ========================================================= */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      padding: 16px 18px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+
+      background: rgba(10, 15, 27, 0.72);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+      animation: slideDown 0.6s ease both;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand-logo {
+      width: 45px;
+      height: 45px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.95),
+          rgba(124, 58, 237, 0.95)
+        );
+
+      box-shadow:
+        0 10px 30px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-subtitle {
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.04);
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.95);
+    }
+
+    .refreshing .refresh-icon {
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      margin-top: 24px;
+      padding: 42px 34px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.94),
+          rgba(9, 15, 28, 0.78)
+        );
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      position: relative;
+      overflow: hidden;
+
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      right: -200px;
+      top: -240px;
+
+      background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.17),
+        transparent 65%
+      );
+
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 11px;
+
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 999px;
+
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.08);
+
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(0.65);
+        opacity: 0.5;
+      }
+    }
+
+    .hero h1 {
+      margin-top: 18px;
+
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -2.8px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #dbeafe 45%,
+          #93c5fd 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin-top: 17px;
+
+      color: #94a3b8;
+      max-width: 690px;
+
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 9px 12px;
+
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+
+      color: #cbd5e1;
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       CONTROL BAR
+    ========================================================= */
+
+    .controls {
+      margin-top: 18px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .filters {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 3px;
+
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter {
+      flex: 0 0 auto;
+
+      padding: 9px 13px;
+
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 999px;
+
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.035);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      transition: all 0.2s ease;
+    }
+
+    .filter:hover {
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .filter.active {
+      color: #fff;
+      border-color: rgba(96, 165, 250, 0.25);
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .status {
+      color: #64748b;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       STORIES GRID
+    ========================================================= */
+
+    .stories {
+      margin-top: 18px;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .story-card {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 300px;
+
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(8, 13, 24, 0.82)
+        );
+
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.16);
+
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+      animation: cardIn 0.55s ease both;
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(96, 165, 250, 0.2);
+
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.25),
+        0 0 35px rgba(59, 130, 246, 0.05);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .story-image {
+      height: 165px;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 1),
+          rgba(15, 23, 42, 1)
+        );
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0.82;
+
+      transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
+    }
+
+    .story-card:hover .story-image img {
+      transform: scale(1.055);
+      opacity: 0.95;
+    }
+
+    .story-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent 20%,
+          rgba(7, 11, 20, 0.85) 100%
+        );
+    }
+
+    .story-number {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      z-index: 2;
+
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background: rgba(7, 11, 20, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 800;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .story-category {
+      position: absolute;
+      left: 55px;
+      top: 17px;
+      z-index: 2;
+
+      padding: 5px 9px;
+
+      border-radius: 999px;
+
+      color: #dbeafe;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(147, 197, 253, 0.15);
+
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .story-body {
+      padding: 18px 18px 19px;
+    }
+
+    .story-title {
+      font-size: 17px;
+      line-height: 1.38;
+      letter-spacing: -0.35px;
+      font-weight: 780;
+
+      color: #f8fafc;
+    }
+
+    .story-summary {
+      margin-top: 10px;
+
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.65;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .why-box {
+      margin-top: 13px;
+      padding: 11px 12px;
+
+      border-left: 2px solid #3b82f6;
+      border-radius: 0 10px 10px 0;
+
+      background: rgba(59, 130, 246, 0.06);
+    }
+
+    .why-label {
+      color: #60a5fa;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .why-text {
+      margin-top: 4px;
+      color: #cbd5e1;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .story-footer {
+      margin-top: 15px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .source-info {
+      min-width: 0;
+    }
+
+    .source {
+      color: #cbd5e1;
+      font-size: 10px;
+      font-weight: 700;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .date {
+      margin-top: 3px;
+      color: #64748b;
+      font-size: 9px;
+    }
+
+    .read-btn {
+      flex: 0 0 auto;
+
+      padding: 8px 11px;
+
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 10px;
+
+      color: #bfdbfe;
+      background: rgba(59, 130, 246, 0.08);
+
+      font-size: 10px;
+      font-weight: 750;
+
+      transition: all 0.2s ease;
+    }
+
+    .read-btn:hover {
+      background: rgba(59, 130, 246, 0.16);
+      border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    /* =========================================================
+       EMPTY / LOADING
+    ========================================================= */
+
+    .loading-card {
+      grid-column: 1 / -1;
+
+      min-height: 260px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 22px;
+
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .loader {
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #60a5fa;
+
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading-text {
+      margin-top: 15px;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    .empty-card {
+      grid-column: 1 / -1;
+
+      padding: 40px 24px;
+      text-align: center;
+
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .empty-icon {
+      font-size: 35px;
+      margin-bottom: 13px;
+    }
+
+    .empty-title {
+      font-size: 16px;
+      font-weight: 750;
+    }
+
+    .empty-text {
+      margin-top: 7px;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      margin-top: 25px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+
+      color: #475569;
+      font-size: 10px;
+
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+
+    .footer-brand {
+      font-weight: 750;
+      color: #64748b;
+    }
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+
+      z-index: 1000;
+
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+
+      width: min(360px, calc(100% - 36px));
+    }
+
+    .toast {
+      padding: 13px 15px;
+
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(18px);
+
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+      color: #e2e8f0;
+
+      font-size: 12px;
+      line-height: 1.5;
+
+      animation:
+        toastIn 0.3s ease both,
+        toastOut 0.35s ease 4.6s forwards;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes toastOut {
+      to {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+    }
+
+    .toast.success {
+      border-left: 3px solid #22c55e;
+    }
+
+    .toast.error {
+      border-left: 3px solid #ef4444;
+    }
+
+    .toast.info {
+      border-left: 3px solid #3b82f6;
+    }
+
+    /* =========================================================
+       INSTALL BANNER
+    ========================================================= */
+
+    .install-banner {
+      position: fixed;
+
+      left: 50%;
+      bottom: 18px;
+
+      transform: translateX(-50%) translateY(130px);
+
+      width: min(440px, calc(100% - 30px));
+
+      padding: 14px;
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 18px;
+
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+
+      z-index: 999;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+    }
+
+    .install-banner.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .install-text {
+      flex: 1;
+    }
+
+    .install-title {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .install-subtitle {
+      margin-top: 3px;
+      color: #64748b;
+      font-size: 10px;
+    }
+
+    .install-btn {
+      padding: 9px 12px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: #3b82f6;
+      color: white;
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 760px) {
+      .app {
+        width: min(100% - 18px, 600px);
+        padding-top: 9px;
+      }
+
+      .topbar {
+        padding: 13px 14px;
+        border-radius: 18px;
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+      }
+
+      .brand-title {
+        font-size: 14px;
+      }
+
+      .brand-subtitle {
+        font-size: 9px;
+      }
+
+      .hero {
+        padding: 31px 22px;
+        border-radius: 22px;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .controls {
+        display: block;
+      }
+
+      .status {
+        display: block;
+        margin-top: 9px;
+      }
+
+      .stories {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        min-height: 0;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      .hero-meta {
+        gap: 7px;
+      }
+
+      .meta-pill {
+        font-size: 10px;
+      }
+
+      .story-image {
+        height: 150px;
+      }
+
+      .story-title {
+        font-size: 16px;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  <div class="container nav">
-    <div class="brand">
-      <div class="logo">₹</div>
-      <div>
-        <div class="brand-title">CA Finance Briefing</div>
-        <div class="brand-sub">Tax • Accounting • Markets • Business</div>
-      </div>
-    </div>
-    <div class="actions">
-      <button class="icon-btn" id="refreshBtn" title="Refresh">↻</button>
-      <button class="primary" id="notifyBtn"><span class="label">Enable Notifications</span><span class="mobile-icon">🔔</span></button>
-    </div>
+
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
+
+  <div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
   </div>
-</header>
 
-<main class="container">
-  <section class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow"><span class="live-dot"></span> Daily Intelligence</div>
-      <h1>Stay ahead of<br><span class="gradient-text">finance.</span></h1>
-      <p>Five important developments across CA, tax, accounting, markets and India business — curated into a fast daily briefing for finance professionals.</p>
-    </div>
+  <!-- =======================================================
+       MAIN APP
+  ======================================================== -->
 
-    <div class="hero-card">
-      <div class="mini-label">Today's briefing</div>
-      <div class="big-number" id="storyCount">05</div>
-      <div class="status">● Latest briefing loaded</div>
-      <div class="mini-grid">
-        <div class="mini"><b>India</b><span>Tax • Business • Markets</span></div>
-        <div class="mini"><b>Global</b><span>Economy • Finance • Regulation</span></div>
+  <main class="app">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          ₹
+        </div>
+
+        <div>
+          <div class="brand-title">
+            CA Finance Briefing
+          </div>
+
+          <div class="brand-subtitle">
+            Tax • Markets • Business • Economy
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="toolbar">
-      <div>
-        <div class="section-title">Top stories</div>
-        <div class="section-sub" id="lastUpdated">Updating briefing…</div>
+      <div class="nav-actions">
+
+        <button
+          class="icon-btn"
+          id="installTopBtn"
+          title="Install App"
+          style="display:none;"
+        >
+          ⬇
+        </button>
+
+        <button
+          class="icon-btn"
+          id="refreshBtn"
+          title="Refresh briefing"
+          aria-label="Refresh briefing"
+        >
+          <span class="refresh-icon">↻</span>
+        </button>
+
       </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          <span class="live-dot"></span>
+          Daily Intelligence
+        </div>
+
+        <h1>
+          Know what<br />
+          matters today.
+        </h1>
+
+        <p>
+          A focused daily briefing covering CA, taxation, accounting,
+          financial markets, Indian business, economy and global finance —
+          curated for finance professionals.
+        </p>
+
+        <div class="hero-meta">
+
+          <div class="meta-pill">
+            <span>⚡</span>
+            Breaking & Current
+          </div>
+
+          <div class="meta-pill">
+            <span>📊</span>
+            Finance Focused
+          </div>
+
+          <div class="meta-pill">
+            <span>🇮🇳</span>
+            India + Global
+          </div>
+
+          <div class="meta-pill">
+            <span>📰</span>
+            5 Key Stories
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FILTERS -->
+
+    <section class="controls">
+
       <div class="filters">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="CA & Tax">CA & Tax</button>
-        <button class="filter" data-filter="Markets">Markets</button>
-        <button class="filter" data-filter="Business">Business</button>
+
+        <button
+          class="filter active"
+          data-category="All"
+        >
+          All
+        </button>
+
+        <button
+          class="filter"
+          data-category="CA & Tax"
+        >
+          CA & Tax
+        </button>
+
+        <button
+          class="filter"
+          data-category="Accounting"
+        >
+          Accounting
+        </button>
+
+        <button
+          class="filter"
+          data-category="Markets"
+        >
+          Markets
+        </button>
+
+        <button
+          class="filter"
+          data-category="Business"
+        >
+          Business
+        </button>
+
+        <button
+          class="filter"
+          data-category="Global"
+        >
+          Global
+        </button>
+
       </div>
+
+      <div
+        class="status"
+        id="statusText"
+      >
+        Loading latest briefing...
+      </div>
+
+    </section>
+
+
+    <!-- STORIES -->
+
+    <section
+      class="stories"
+      id="stories"
+    >
+
+      <div class="loading-card">
+
+        <div class="loader"></div>
+
+        <div class="loading-text">
+          Fetching today's financial intelligence...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      <div class="footer-brand">
+        CA Finance Briefing
+      </div>
+
+      <div id="lastUpdated">
+        Connecting to briefing server...
+      </div>
+
+      <div>
+        Built for finance professionals
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- =======================================================
+       TOASTS
+  ======================================================== -->
+
+  <div
+    class="toast-container"
+    id="toastContainer"
+  ></div>
+
+
+  <!-- =======================================================
+       INSTALL BANNER
+  ======================================================== -->
+
+  <div
+    class="install-banner"
+    id="installBanner"
+  >
+
+    <div class="install-text">
+
+      <div class="install-title">
+        Install CA Finance Briefing
+      </div>
+
+      <div class="install-subtitle">
+        Add the dashboard to your phone's home screen.
+      </div>
+
     </div>
 
-    <div class="news-grid" id="newsGrid">
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-    </div>
-  </section>
+    <button
+      class="install-btn"
+      id="installBtn"
+    >
+      Install
+    </button>
 
-  <details class="settings">
-    <summary>⚙ App Settings</summary>
-    <div class="settings-body">
-      <div class="field">
-        <label for="backendUrl">Google Apps Script Web App URL</label>
-        <input id="backendUrl" placeholder="https://script.google.com/macros/s/.../exec">
-      </div>
-      <div class="field">
-        <label for="notificationTime">Preferred notification time</label>
-        <input id="notificationTime" type="time" value="07:00">
-      </div>
-      <div class="setting-actions">
-        <button class="primary" id="saveSettings">Save settings</button>
-        <button id="installBtn">Install app</button>
-      </div>
-    </div>
-  </details>
-</main>
+  </div>
 
-<footer>
-  CA Finance Briefing • Built for daily finance intelligence • <span id="year"></span>
-</footer>
 
-<div class="toast" id="toast"></div>
+  <script>
 
-<script>
-const DEMO_STORIES = [
-  {
-    category:"CA & Tax",
-    title:"Tax & accounting updates",
-    summary:"Your latest CA, GST, income-tax, accounting-standard and regulatory developments will appear here after the Apps Script backend is connected.",
-    why:"Track changes that can affect compliance, reporting, audit documentation and client advisory.",
-    source:"CA Finance Briefing",
-    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
-    url:"#"
-  },
-  {
-    category:"Markets",
-    title:"Markets & finance briefing",
-    summary:"Connect the backend to populate the latest India and global market developments, corporate finance events and material financial news.",
-    why:"Useful for market awareness, valuation discussions, treasury and FP&A conversations.",
-    source:"CA Finance Briefing",
-    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
-    url:"#"
-  },
-  {
-    category:"Business",
-    title:"India business & economy",
-    summary:"The briefing is designed to surface material developments across Indian companies, sectors, policy and macroeconomics.",
-    why:"Helps connect financial analysis with business drivers, margins, working capital and growth.",
-    source:"CA Finance Briefing",
-    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
-    url:"#"
-  },
-  {
-    category:"Global",
-    title:"Global economy & regulation",
-    summary:"Global finance, accounting, tax, regulation and macro developments can be displayed alongside India-focused stories.",
-    why:"Builds the global context needed for corporate finance and investment analysis.",
-    source:"CA Finance Briefing",
-    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
-    url:"#"
-  },
-  {
-    category:"Finance",
-    title:"Daily finance takeaway",
-    summary:"Each story is presented with a concise summary and a finance-professional relevance note, so the briefing stays practical.",
-    why:"Turns news consumption into an actionable finance-learning routine.",
-    source:"CA Finance Briefing",
-    date:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}),
-    url:"#"
-  }
-];
+    /* =========================================================
+       CONFIGURATION
+    ========================================================= */
 
-let stories = [];
-let activeFilter = "all";
-let deferredInstallPrompt = null;
+    const APPS_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbywH8CC_GGi6mogbwQtrKEsaotBZ4N1Ug0tQMDFzko3zyuRCIVpUskHlFHNH4yjGQ5F/exec";
 
-const $ = id => document.getElementById(id);
-$("year").textContent = new Date().getFullYear();
 
-function escapeHTML(value=""){
-  return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
+    const MAX_STORIES = 5;
 
-function showToast(message){
-  const t=$("toast");
-  t.textContent=message;
-  t.classList.add("show");
-  clearTimeout(window.__toast);
-  window.__toast=setTimeout(()=>t.classList.remove("show"),2600);
-}
 
-function render(){
-  const grid=$("newsGrid");
-  const filtered = activeFilter==="all" ? stories :
-    stories.filter(s => (s.category||"").toLowerCase().includes(activeFilter.toLowerCase()));
+    /* =========================================================
+       STATE
+    ========================================================= */
 
-  $("storyCount").textContent=String(filtered.length).padStart(2,"0");
+    let allStories = [];
 
-  if(!filtered.length){
-    grid.innerHTML='<div class="empty">No stories match this filter.</div>';
-    return;
-  }
+    let selectedCategory = "All";
 
-  grid.innerHTML=filtered.map((s,i)=>`
-    <article class="story" style="--i:${i}">
-      <div class="story-top">
-        <span class="tag">${escapeHTML(s.category||"Finance")}</span>
-        <span class="date">${escapeHTML(s.date||"Latest")}</span>
-      </div>
-      <h2>${escapeHTML(s.title||"Untitled story")}</h2>
-      <p class="summary">${escapeHTML(s.summary||"Open the source for the latest details.")}</p>
-      <div class="why">
-        <strong>Why it matters</strong>
-        <span>${escapeHTML(s.why||"Relevant for finance, accounting and business analysis.")}</span>
-      </div>
-      <div class="story-bottom">
-        <span class="source">${escapeHTML(s.source||"Source")}</span>
-        ${s.url && s.url!=="#" ? `<a class="read" href="${escapeHTML(s.url)}" target="_blank" rel="noopener">Read source ↗</a>` : ""}
-      </div>
-    </article>
-  `).join("");
-}
+    let deferredInstallPrompt = null;
 
-async function loadStories(){
-  const backend = localStorage.getItem("backendUrl") || "";
-  if(!backend){
-    stories=DEMO_STORIES;
-    $("lastUpdated").textContent="Demo content • Connect Apps Script in Settings";
-    render();
-    return;
-  }
+    let isLoading = false;
 
-  $("lastUpdated").textContent="Refreshing latest briefing…";
-  try{
-    const response=await fetch(backend + (backend.includes("?")?"&":"?") + "action=latest", {cache:"no-store"});
-    if(!response.ok) throw new Error("Backend returned " + response.status);
-    const data=await response.json();
-    stories=Array.isArray(data.stories) ? data.stories.slice(0,5) : [];
-    if(!stories.length) stories=DEMO_STORIES;
-    $("lastUpdated").textContent="Updated " + new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
-    render();
-  }catch(err){
-    stories=DEMO_STORIES;
-    $("lastUpdated").textContent="Demo content • Backend connection failed";
-    render();
-    showToast("Could not load the briefing. Check your Apps Script URL.");
-  }
-}
 
-document.querySelectorAll(".filter").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    activeFilter=btn.dataset.filter;
-    render();
-  });
-});
+    /* =========================================================
+       DOM
+    ========================================================= */
 
-$("refreshBtn").addEventListener("click", async ()=>{
-  const btn=$("refreshBtn");
-  btn.style.transform="rotate(360deg)";
-  setTimeout(()=>btn.style.transform="",450);
-  await loadStories();
-  showToast("Briefing refreshed");
-});
+    const storiesContainer =
+      document.getElementById("stories");
 
-$("saveSettings").addEventListener("click",()=>{
-  localStorage.setItem("backendUrl",$("backendUrl").value.trim());
-  localStorage.setItem("notificationTime",$("notificationTime").value);
-  showToast("Settings saved");
-  loadStories();
-});
+    const statusText =
+      document.getElementById("statusText");
 
-$("backendUrl").value=localStorage.getItem("backendUrl")||"";
-$("notificationTime").value=localStorage.getItem("notificationTime")||"07:00";
+    const lastUpdated =
+      document.getElementById("lastUpdated");
 
-$("notifyBtn").addEventListener("click",async()=>{
-  if(!("Notification" in window)){
-    showToast("Notifications are not supported in this browser.");
-    return;
-  }
-  const permission=await Notification.requestPermission();
-  if(permission==="granted"){
-    showToast("Notifications enabled on this device.");
-    try{
-      if("serviceWorker" in navigator) await navigator.serviceWorker.register("./sw.js");
-    }catch(e){}
-  }else{
-    showToast("Notification permission was not granted.");
-  }
-});
+    const refreshBtn =
+      document.getElementById("refreshBtn");
 
-$("installBtn").addEventListener("click",async()=>{
-  if(deferredInstallPrompt){
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt=null;
-  }else{
-    showToast("Use your browser menu → Install app / Add to Home screen.");
-  }
-});
+    const toastContainer =
+      document.getElementById("toastContainer");
 
-window.addEventListener("beforeinstallprompt",e=>{
-  e.preventDefault();
-  deferredInstallPrompt=e;
-});
+    const installBanner =
+      document.getElementById("installBanner");
 
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
-}
+    const installBtn =
+      document.getElementById("installBtn");
 
-loadStories();
-</script>
+    const installTopBtn =
+      document.getElementById("installTopBtn");
+
+
+    /* =========================================================
+       INITIALISE
+    ========================================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        setupFilters();
+
+        setupInstall();
+
+        loadBriefing();
+
+        registerServiceWorker();
+
+      }
+    );
+
+
+    /* =========================================================
+       SERVICE WORKER
+    ========================================================= */
+
+    function registerServiceWorker() {
+
+      if (
+        "serviceWorker" in navigator
+      ) {
+
+        window.addEventListener(
+          "load",
+          () => {
+
+            navigator.serviceWorker
+              .register("./sw.js")
+              .then(
+                registration => {
+
+                  console.log(
+                    "Service Worker registered:",
+                    registration.scope
+                  );
+
+                }
+              )
+              .catch(
+                error => {
+
+                  console.warn(
+                    "Service Worker registration failed:",
+                    error
+                  );
+
+                }
+              );
+
+          }
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       LOAD BRIEFING
+    ========================================================= */
+
+    async function loadBriefing() {
+
+      if (isLoading) {
+        return;
+      }
+
+      isLoading = true;
+
+      setRefreshing(true);
+
+      statusText.textContent =
+        "Fetching latest briefing...";
+
+      try {
+
+        const data =
+          await requestJSONP(
+            APPS_SCRIPT_URL +
+            "?action=latest"
+          );
+
+        console.log(
+          "Apps Script response:",
+          data
+        );
+
+        if (
+          data &&
+          data.success &&
+          Array.isArray(data.stories)
+        ) {
+
+          allStories =
+            data.stories.slice(
+              0,
+              MAX_STORIES
+            );
+
+          renderStories();
+
+          const updated =
+            data.fetchedAt ||
+            data.updatedAt ||
+            new Date().toISOString();
+
+          lastUpdated.textContent =
+            "Updated " +
+            formatDate(updated);
+
+          statusText.textContent =
+            allStories.length +
+            " stories loaded";
+
+          showToast(
+            "Latest briefing loaded.",
+            "success"
+          );
+
+        } else {
+
+          throw new Error(
+            data && data.error
+              ? data.error
+              : "Invalid response from Apps Script."
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Briefing error:",
+          error
+        );
+
+        showError(error);
+
+        statusText.textContent =
+          "Unable to load briefing";
+
+      } finally {
+
+        isLoading = false;
+
+        setRefreshing(false);
+
+      }
+
+    }
+
+
+    /* =========================================================
+       OPTIONAL FORCE REFRESH
+    ========================================================= */
+
+    async function refreshBriefing() {
+
+      if (isLoading) {
+        return;
+      }
+
+      isLoading = true;
+
+      setRefreshing(true);
+
+      statusText.textContent =
+        "Refreshing today's briefing...";
+
+      try {
+
+        const data =
+          await requestJSONP(
+            APPS_SCRIPT_URL +
+            "?action=refresh"
+          );
+
+        console.log(
+          "Refresh response:",
+          data
+        );
+
+        if (
+          data &&
+          data.success &&
+          Array.isArray(data.stories)
+        ) {
+
+          allStories =
+            data.stories.slice(
+              0,
+              MAX_STORIES
+            );
+
+          renderStories();
+
+          lastUpdated.textContent =
+            "Updated " +
+            formatDate(
+              data.fetchedAt ||
+              new Date().toISOString()
+            );
+
+          statusText.textContent =
+            allStories.length +
+            " fresh stories loaded";
+
+          showToast(
+            "Briefing refreshed successfully.",
+            "success"
+          );
+
+        } else {
+
+          throw new Error(
+            data && data.error
+              ? data.error
+              : "Refresh failed."
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Refresh error:",
+          error
+        );
+
+        showToast(
+          "Refresh failed. Showing the latest available briefing.",
+          "error"
+        );
+
+      } finally {
+
+        isLoading = false;
+
+        setRefreshing(false);
+
+      }
+
+    }
+
+
+    /* =========================================================
+       JSONP REQUEST
+       
+       Google Apps Script ContentService responses can cause
+       browser CORS restrictions. JSONP avoids that problem.
+    ========================================================= */
+
+    function requestJSONP(url) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const callbackName =
+            "__caFinanceCallback_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 100000
+            );
+
+          const script =
+            document.createElement("script");
+
+          let completed = false;
+
+          const timeout =
+            setTimeout(
+              () => {
+
+                if (completed) {
+                  return;
+                }
+
+                completed = true;
+
+                cleanup();
+
+                reject(
+                  new Error(
+                    "The Apps Script server did not respond within 15 seconds."
+                  )
+                );
+
+              },
+              15000
+            );
+
+
+          window[callbackName] =
+            function(data) {
+
+              if (completed) {
+                return;
+              }
+
+              completed = true;
+
+              clearTimeout(timeout);
+
+              cleanup();
+
+              resolve(data);
+
+            };
+
+
+          script.src =
+            url +
+            (
+              url.includes("?")
+                ? "&"
+                : "?"
+            ) +
+            "callback=" +
+            encodeURIComponent(
+              callbackName
+            );
+
+
+          script.async = true;
+
+
+          script.onerror =
+            function() {
+
+              if (completed) {
+                return;
+              }
+
+              completed = true;
+
+              clearTimeout(timeout);
+
+              cleanup();
+
+              reject(
+                new Error(
+                  "Unable to connect to the Apps Script backend."
+                )
+              );
+
+            };
+
+
+          document
+            .head
+            .appendChild(script);
+
+
+          function cleanup() {
+
+            try {
+
+              script.remove();
+
+            } catch (e) {}
+
+            try {
+
+              delete window[
+                callbackName
+              ];
+
+            } catch (e) {
+
+              window[
+                callbackName
+              ] = undefined;
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       RENDER STORIES
+    ========================================================= */
+
+    function renderStories() {
+
+      const filteredStories =
+        selectedCategory === "All"
+          ? allStories
+          : allStories.filter(
+              story =>
+                normalizeCategory(
+                  story.category
+                ) ===
+                normalizeCategory(
+                  selectedCategory
+                )
+            );
+
+
+      if (
+        !filteredStories.length
+      ) {
+
+        storiesContainer.innerHTML = `
+
+          <div class="empty-card">
+
+            <div class="empty-icon">
+              📰
+            </div>
+
+            <div class="empty-title">
+              No stories in this category
+            </div>
+
+            <div class="empty-text">
+              Try another category or refresh the briefing.
+            </div>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      storiesContainer.innerHTML =
+        filteredStories
+          .map(
+            (story, index) =>
+              createStoryCard(
+                story,
+                index
+              )
+          )
+          .join("");
+
+    }
+
+
+    /* =========================================================
+       STORY CARD
+    ========================================================= */
+
+    function createStoryCard(
+      story,
+      index
+    ) {
+
+      const title =
+        escapeHtml(
+          story.title ||
+          "Untitled story"
+        );
+
+
+      const summary =
+        escapeHtml(
+          story.summary ||
+          story.description ||
+          "No summary available."
+        );
+
+
+      const why =
+        escapeHtml(
+          story.whyItMatters ||
+          story.why ||
+          "Relevant for finance and business professionals."
+        );
+
+
+      const category =
+        escapeHtml(
+          story.category ||
+          "Finance"
+        );
+
+
+      const source =
+        escapeHtml(
+          story.source ||
+          "Source unavailable"
+        );
+
+
+      const published =
+        formatDate(
+          story.publishedAt ||
+          story.pubDate ||
+          story.date
+        );
+
+
+      const image =
+        safeUrl(
+          story.imageUrl ||
+          story.image ||
+          ""
+        );
+
+
+      const articleUrl =
+        safeUrl(
+          story.url ||
+          story.link ||
+          "#"
+        );
+
+
+      const imageHtml =
+        image
+          ? `
+              <img
+                src="${image}"
+                alt=""
+                loading="lazy"
+                onerror="this.parentElement.classList.add('image-failed'); this.remove();"
+              />
+            `
+          : "";
+
+
+      return `
+
+        <article
+          class="story-card"
+          style="animation-delay:${index * 80}ms"
+        >
+
+          <div class="story-image">
+
+            ${imageHtml}
+
+            <div class="story-number">
+              ${index + 1}
+            </div>
+
+            <div class="story-category">
+              ${category}
+            </div>
+
+          </div>
+
+
+          <div class="story-body">
+
+            <h2 class="story-title">
+              ${title}
+            </h2>
+
+
+            <p class="story-summary">
+              ${summary}
+            </p>
+
+
+            <div class="why-box">
+
+              <div class="why-label">
+                Why it matters
+              </div>
+
+              <div class="why-text">
+                ${why}
+              </div>
+
+            </div>
+
+
+            <div class="story-footer">
+
+              <div class="source-info">
+
+                <div
+                  class="source"
+                  title="${source}"
+                >
+                  ${source}
+                </div>
+
+                <div class="date">
+                  ${published}
+                </div>
+
+              </div>
+
+
+              ${
+                articleUrl !== "#"
+                  ? `
+                    <a
+                      class="read-btn"
+                      href="${articleUrl}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read story ↗
+                    </a>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       CATEGORY FILTERS
+    ========================================================= */
+
+    function setupFilters() {
+
+      document
+        .querySelectorAll(".filter")
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                document
+                  .querySelectorAll(".filter")
+                  .forEach(
+                    item =>
+                      item.classList.remove(
+                        "active"
+                      )
+                  );
+
+
+                button.classList.add(
+                  "active"
+                );
+
+
+                selectedCategory =
+                  button.dataset.category ||
+                  "All";
+
+
+                renderStories();
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    /* =========================================================
+       REFRESH BUTTON
+    ========================================================= */
+
+    refreshBtn.addEventListener(
+      "click",
+      () => {
+
+        refreshBriefing();
+
+      }
+    );
+
+
+    /* =========================================================
+       REFRESH ANIMATION
+    ========================================================= */
+
+    function setRefreshing(
+      state
+    ) {
+
+      if (state) {
+
+        refreshBtn.classList.add(
+          "refreshing"
+        );
+
+        refreshBtn.disabled = true;
+
+      } else {
+
+        refreshBtn.classList.remove(
+          "refreshing"
+        );
+
+        refreshBtn.disabled = false;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       ERROR UI
+    ========================================================= */
+
+    function showError(
+      error
+    ) {
+
+      const message =
+        error &&
+        error.message
+          ? error.message
+          : "Unknown connection error.";
+
+
+      storiesContainer.innerHTML = `
+
+        <div class="empty-card">
+
+          <div class="empty-icon">
+            ⚠️
+          </div>
+
+          <div class="empty-title">
+            Could not load the briefing
+          </div>
+
+          <div class="empty-text">
+            Check that your Google Apps Script is deployed
+            as a Web App and that access is set to
+            <strong>Anyone</strong>.
+            <br /><br />
+            ${escapeHtml(message)}
+          </div>
+
+          <br />
+
+          <button
+            class="read-btn"
+            onclick="loadBriefing()"
+          >
+            Try Again
+          </button>
+
+        </div>
+
+      `;
+
+
+      showToast(
+        "Could not connect to the briefing server.",
+        "error"
+      );
+
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(
+      message,
+      type = "info"
+    ) {
+
+      const toast =
+        document.createElement("div");
+
+      toast.className =
+        "toast " + type;
+
+      toast.textContent =
+        message;
+
+
+      toastContainer.appendChild(
+        toast
+      );
+
+
+      setTimeout(
+        () => {
+
+          toast.remove();
+
+        },
+        5200
+      );
+
+    }
+
+
+    /* =========================================================
+       DATE FORMAT
+    ========================================================= */
+
+    function formatDate(
+      value
+    ) {
+
+      if (!value) {
+        return "Date unavailable";
+      }
+
+
+      const date =
+        new Date(value);
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return String(value);
+
+      }
+
+
+      return date.toLocaleString(
+        "en-IN",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       CATEGORY NORMALISATION
+    ========================================================= */
+
+    function normalizeCategory(
+      value
+    ) {
+
+      return String(
+        value || ""
+      )
+        .toLowerCase()
+        .replace(
+          /&/g,
+          "and"
+        )
+        .replace(
+          /[^a-z0-9]+/g,
+          ""
+        );
+
+    }
+
+
+    /* =========================================================
+       SAFE URL
+    ========================================================= */
+
+    function safeUrl(
+      value
+    ) {
+
+      if (!value) {
+        return "";
+      }
+
+
+      try {
+
+        const url =
+          new URL(
+            value,
+            window.location.href
+          );
+
+
+        if (
+          url.protocol === "http:" ||
+          url.protocol === "https:"
+        ) {
+
+          return url.href;
+
+        }
+
+      } catch (e) {}
+
+      return "";
+
+    }
+
+
+    /* =========================================================
+       HTML ESCAPING
+    ========================================================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(
+        value ?? ""
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =========================================================
+       PWA INSTALLATION
+    ========================================================= */
+
+    function setupInstall() {
+
+      window.addEventListener(
+        "beforeinstallprompt",
+        event => {
+
+          event.preventDefault();
+
+          deferredInstallPrompt =
+            event;
+
+
+          installBanner.classList.add(
+            "show"
+          );
+
+          installTopBtn.style.display =
+            "grid";
+
+        }
+      );
+
+
+      installBtn.addEventListener(
+        "click",
+        installPWA
+      );
+
+
+      installTopBtn.addEventListener(
+        "click",
+        installPWA
+      );
+
+
+      window.addEventListener(
+        "appinstalled",
+        () => {
+
+          deferredInstallPrompt =
+            null;
+
+          installBanner.classList.remove(
+            "show"
+          );
+
+          installTopBtn.style.display =
+            "none";
+
+          showToast(
+            "CA Finance Briefing installed successfully.",
+            "success"
+          );
+
+        }
+      );
+
+    }
+
+
+    async function installPWA() {
+
+      if (!deferredInstallPrompt) {
+
+        showToast(
+          "Use your browser's 'Add to Home Screen' option to install the app.",
+          "info"
+        );
+
+        return;
+
+      }
+
+
+      deferredInstallPrompt.prompt();
+
+
+      const result =
+        await deferredInstallPrompt.userChoice;
+
+
+      console.log(
+        "Install choice:",
+        result.outcome
+      );
+
+
+      deferredInstallPrompt =
+        null;
+
+
+      installBanner.classList.remove(
+        "show"
+      );
+
+      installTopBtn.style.display =
+        "none";
+
+    }
+
+
+    /* =========================================================
+       ONLINE / OFFLINE STATUS
+    ========================================================= */
+
+    window.addEventListener(
+      "online",
+      () => {
+
+        showToast(
+          "Internet connection restored.",
+          "success"
+        );
+
+        loadBriefing();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "offline",
+      () => {
+
+        showToast(
+          "You are offline. Previously loaded data may remain available.",
+          "info"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       VISIBILITY REFRESH
+       
+       If the user returns to the app after a long time,
+       check for newer data.
+    ========================================================= */
+
+    let hiddenAt = null;
+
+
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+
+        if (
+          document.hidden
+        ) {
+
+          hiddenAt =
+            Date.now();
+
+        } else if (
+          hiddenAt &&
+          Date.now() -
+            hiddenAt >
+            15 * 60 * 1000
+        ) {
+
+          loadBriefing();
+
+        }
+
+      }
+    );
+
+  </script>
+
 </body>
 </html>
